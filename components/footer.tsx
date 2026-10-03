@@ -28,11 +28,12 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Col 1: Wordmark & Back to Top */}
           <div className="space-y-4">
-            <div className="flex items-center text-sm font-bold text-text">
-              <span className="text-text-faint">[</span>
-              <span className="text-accent">{siteConfig.initials}</span>
-              <span className="text-text-faint">]</span>
-              <span className="inline-block w-2 h-3.5 bg-accent ml-0.5 animate-blink" />
+            <div className="flex items-center text-sm font-bold text-text font-mono">
+              <span className="text-text-faint">&gt; </span>
+              <span className="text-accent font-bold">SAJID</span>
+              <span className="text-text-faint mx-1">//</span>
+              <span className="text-text">QUANT</span>
+              <span className="inline-block w-2 h-3.5 bg-accent ml-1.5 animate-blink" />
             </div>
             <p className="text-text-muted leading-relaxed max-w-xs">
               Quantitative research, market microstructure models, and high-throughput risk engines.

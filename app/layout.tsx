@@ -52,12 +52,37 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Sajid Ahmad",
+    alternateName: "Ahmad Sajid",
+    url: "https://github.com/ahmadmdsajid129/sajid-ahmad-portfolio",
+    jobTitle: "Quantitative Researcher & Systems Engineer",
+    sameAs: ["https://github.com/ahmadmdsajid129"],
+    knowsAbout: [
+      "Quantitative Research",
+      "Market Microstructure",
+      "Limit Order Books",
+      "Monte Carlo Simulation",
+      "Derivatives Pricing",
+      "Machine Learning",
+      "High-Throughput Systems",
+    ],
+  };
+
   return (
     <html
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="font-sans antialiased min-h-screen bg-bg text-text">
         <ThemeProvider>
           <ToastProvider>

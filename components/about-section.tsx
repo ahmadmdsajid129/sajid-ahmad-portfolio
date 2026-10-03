@@ -200,13 +200,13 @@ export function AboutSection() {
           <div className="terminal-panel p-4 bg-bg-inset border border-border flex items-center gap-4">
             <div className="w-20 h-20 bg-bg-elevated border border-border rounded relative overflow-hidden flex items-center justify-center group cursor-pointer shrink-0">
               {/* Profile Avatar / Monogram */}
-              <div className="font-mono text-2xl font-bold text-accent group-hover:scale-105 transition-transform">
-                {siteConfig.initials}
+              <div className="font-mono text-sm font-bold text-accent group-hover:scale-105 transition-transform tracking-wider">
+                SAJID
               </div>
               <div className="absolute inset-0 bg-accent/5 pointer-events-none" />
             </div>
             <div className="font-mono text-xs space-y-1">
-              <div className="text-text font-bold">Ahmad Sajid</div>
+              <div className="text-text font-bold">Sajid Ahmad</div>
               <div className="text-text-faint text-[10px]">
                 Quantitative Research &middot; Systems Architecture
               </div>

@@ -2,6 +2,7 @@ export interface SiteConfig {
   name: string;
   firstName: string;
   initials: string;
+  logoText: string;
   title: string;
   tagline: string;
   pitch: string;
@@ -18,10 +19,11 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: "[[PLACEHOLDER: Ahmad Sajid]]",
-  firstName: "[[PLACEHOLDER: Ahmad]]",
-  initials: "AS",
-  title: "Ahmad Sajid // Quantitative Research & Systems",
+  name: "Sajid Ahmad",
+  firstName: "Sajid",
+  initials: "SAJID",
+  logoText: "SAJID // QUANT",
+  title: "Sajid Ahmad // Quantitative Research & Systems",
   tagline: "I turn noisy data into testable edges.",
   pitch:
     "I build and stress-test systematic trading and risk systems: a limit-order-book simulator, a Monte Carlo derivatives pricer, and a real-time fraud engine, all open source.",
