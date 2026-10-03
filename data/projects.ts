@@ -377,9 +377,9 @@ export const projectsData: ProjectData[] = [
           "Vendor earnings (item price minus default 10% commission) land in a pendingClearance bucket. Funds settle into the vendor's wallet balance only after order delivery plus the expiration of the customer return window.",
       },
       {
-        question: "What is your quant critique of the selling-fast heuristic?",
+        question: "How did you validate checkout concurrency and prevent stock overselling?",
         answer:
-          "The current heuristic vScore = 3*sales + 2*cart_adds + 1*views uses arbitrary static weights and a hard threshold of 20 with cliff-edge resets each epoch. A quantitative approach would model demand via walk-forward Bayesian updating or Thompson sampling to account for traffic normalization and uncertainty.",
+          "We conducted automated k6 load tests simulating concurrent checkout surges. Inventory reservations are decremented through atomic findAndModify checks against stock levels, while Redis holds temporary cart locks during payment gateway redirection to prevent inventory double-booking.",
       },
     ],
   },

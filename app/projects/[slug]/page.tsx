@@ -148,7 +148,7 @@ export default function ProjectTearsheetPage({ params }: { params: { slug: strin
       {/* 2. TL;DR Executive Box */}
       <section className="terminal-panel p-6 bg-bg-elevated border-l-4 border-l-accent border-border space-y-3 font-mono text-xs">
         <div className="text-accent font-bold text-sm uppercase tracking-wide">
-          TL;DR | EXECUTIVE SUMMARY
+          {project.clientRepoPrivate ? "TECHNICAL BRIEF | EXECUTIVE SUMMARY" : "PROJECT AT A GLANCE | EXECUTIVE SUMMARY"}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-text-muted leading-relaxed">
           <div>
@@ -216,10 +216,14 @@ export default function ProjectTearsheetPage({ params }: { params: { slug: strin
 
       {/* Visual Chart / Demonstration Section */}
       <section className="space-y-4">
-        <h2 className="text-xl font-bold font-heading text-text">MODEL VISUALIZATION</h2>
+        <h2 className="text-xl font-bold font-heading text-text">
+          {project.clientRepoPrivate ? "ARCHITECTURE & SYSTEM PIPELINE" : "MODEL VISUALIZATION"}
+        </h2>
         <ProjectCardVisual slug={project.slug} />
         <div className="text-[10px] font-mono text-text-faint">
-          *Backtests and simulations are hypothetical. See &ldquo;How this could be wrong&rdquo; below for exhaustive assumptions and caveats.
+          {project.clientRepoPrivate
+            ? "*Live client production architecture on Next.js 14 and MongoDB Atlas. Verified under real customer checkout flow."
+            : "*Backtests and simulations are hypothetical. See \u201cHow this could be wrong\u201d below for exhaustive assumptions and caveats."}
         </div>
       </section>
 
@@ -491,14 +495,20 @@ def simulate_gbm_antithetic(S0, r, sigma, T, num_paths, steps):
         )}
       </section>
 
-      {/* 5. How This Could Be Wrong (Prominent Amber Warning) */}
+      {/* 5. How This Could Be Wrong / Architectural Considerations */}
       <section className="terminal-panel p-6 bg-bg-elevated border-l-4 border-l-warn border-border space-y-4 font-mono text-xs">
         <div className="flex items-center gap-2 text-warn font-bold text-sm">
           <AlertTriangle className="w-4 h-4" />
-          <span>HOW THIS COULD BE WRONG | ASSUMPTIONS &amp; LIMITATIONS</span>
+          <span>
+            {project.clientRepoPrivate
+              ? "PRODUCTION CONSIDERATIONS | ARCHITECTURAL TRADE-OFFS"
+              : "HOW THIS COULD BE WRONG | ASSUMPTIONS & LIMITATIONS"}
+          </span>
         </div>
         <p className="text-text-muted leading-relaxed">
-          Quantitative honesty requires explicitly stating every structural assumption and model limitation. The following caveats apply to this tearsheet:
+          {project.clientRepoPrivate
+            ? "Engineering honesty requires explicitly stating every structural trade-off, edge case, and architectural constraint encountered in production:"
+            : "Quantitative honesty requires explicitly stating every structural assumption and model limitation. The following caveats apply to this tearsheet:"}
         </p>
         <ul className="space-y-2 text-text">
           {project.howThisCouldBeWrong.map((caveat, i) => (
@@ -526,20 +536,93 @@ def simulate_gbm_antithetic(S0, r, sigma, T, num_paths, steps):
         </div>
       </section>
 
-      {/* 7. Exact Reproduction Steps */}
-      <section className="space-y-3 font-mono text-xs">
-        <h2 className="text-xl font-bold font-heading text-text">REPRODUCE IT</h2>
-        <p className="text-text-muted">
-          Exact terminal commands to clone, configure virtual environment, and run the pipeline locally:
-        </p>
-        <div className="terminal-panel p-4 bg-bg-inset border border-border space-y-1 text-text leading-relaxed">
-          {project.reproduceCommands.map((cmd, idx) => (
-            <div key={idx} className={cmd.startsWith("#") ? "text-text-faint" : "text-accent"}>
-              {cmd}
+      {/* 7. Exact Reproduction Steps (for Open Source) OR Client Delivery & Production Deployment (for Private Client Repos) */}
+      {project.clientRepoPrivate ? (
+        <section className="space-y-4 font-mono text-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border pb-3">
+            <div>
+              <h2 className="text-xl font-bold font-heading text-text">
+                CLIENT DELIVERY &amp; LIVE PRODUCTION DEPLOYMENT
+              </h2>
+              <div className="text-text-muted text-[11px] mt-0.5">
+                Proprietary commercial engagement &middot; Operational at{" "}
+                <span className="text-accent font-semibold">himavogue.com</span>
+              </div>
             </div>
-          ))}
-        </div>
-      </section>
+            {project.liveDemoUrl && (
+              <a
+                href={project.liveDemoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="px-4 py-2 bg-up text-bg font-bold rounded flex items-center gap-2 hover:brightness-110 active:scale-98 transition-all shrink-0 self-start sm:self-auto shadow-sm"
+              >
+                <span className="w-2 h-2 rounded-full bg-bg animate-pulse" />
+                <span>VISIT LIVE STORE (himavogue.com)</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="terminal-panel p-5 bg-bg-elevated border border-border space-y-3">
+              <div className="flex items-center gap-2 text-accent font-bold text-xs uppercase">
+                <ShieldCheck className="w-4 h-4" />
+                <span>COMMERCIAL IP &amp; PRIVACY NOTICE</span>
+              </div>
+              <p className="text-text-muted leading-relaxed">
+                Source code, vendor credentials, and customer databases are held in a private repository under commercial non-disclosure. Core architectural patterns, database schemas, and cryptographic checksum methods are demonstrated in this tearsheet via sanitized code excerpts.
+              </p>
+              <div className="p-2.5 bg-bg-inset border border-border/80 text-[11px] text-text-faint space-y-1">
+                <div>&bull; Code Repository: Private / Commercial Client Work</div>
+                <div>&bull; Client Delivery: Production Ready &amp; Operational</div>
+                <div>&bull; Verification: Live store accessible at himavogue.com</div>
+              </div>
+            </div>
+
+            <div className="terminal-panel p-5 bg-bg-elevated border border-border space-y-3">
+              <div className="flex items-center gap-2 text-accent font-bold text-xs uppercase">
+                <Terminal className="w-4 h-4" />
+                <span>PRODUCTION HOSTING &amp; INFRASTRUCTURE</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-[11px]">
+                <div className="p-2 bg-bg-inset border border-border rounded">
+                  <div className="text-text-faint text-[10px]">PLATFORM</div>
+                  <div className="font-bold text-text mt-0.5">Next.js 14 App Router</div>
+                </div>
+                <div className="p-2 bg-bg-inset border border-border rounded">
+                  <div className="text-text-faint text-[10px]">DATABASE</div>
+                  <div className="font-bold text-text mt-0.5">MongoDB Atlas</div>
+                </div>
+                <div className="p-2 bg-bg-inset border border-border rounded">
+                  <div className="text-text-faint text-[10px]">CACHE LAYER</div>
+                  <div className="font-bold text-text mt-0.5">Redis (Sliding Window)</div>
+                </div>
+                <div className="p-2 bg-bg-inset border border-border rounded">
+                  <div className="text-text-faint text-[10px]">MEDIA CDN</div>
+                  <div className="font-bold text-text mt-0.5">Cloudflare R2 (WebP)</div>
+                </div>
+              </div>
+              <div className="text-[11px] text-text-faint pt-1">
+                Integrated with eSewa Payment Gateway (Nepal) with server-to-server HMAC signature validation.
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <section className="space-y-3 font-mono text-xs">
+          <h2 className="text-xl font-bold font-heading text-text">REPRODUCE IT</h2>
+          <p className="text-text-muted">
+            Exact terminal commands to clone, configure virtual environment, and run the pipeline locally:
+          </p>
+          <div className="terminal-panel p-4 bg-bg-inset border border-border space-y-1 text-text leading-relaxed">
+            {project.reproduceCommands.map((cmd, idx) => (
+              <div key={idx} className={cmd.startsWith("#") ? "text-text-faint" : "text-accent"}>
+                {cmd}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 8. Interview Talking Points (Collapsed <details>) */}
       <section className="space-y-4 font-mono text-xs">
