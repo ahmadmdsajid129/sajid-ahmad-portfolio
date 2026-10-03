@@ -4,6 +4,9 @@ import { notFound } from "next/navigation";
 import { projectsData } from "@/data/projects";
 import { CodeBlock } from "@/components/code-block";
 import { ProjectCardVisual } from "@/components/project-card-visual";
+import { MonteCarloLab } from "@/components/monte-carlo-lab";
+import { FraudReplay } from "@/components/fraud-replay";
+import { ThompsonSimulator } from "@/components/thompson-simulator";
 import {
   ArrowLeft,
   ExternalLink,
@@ -197,6 +200,27 @@ export default function ProjectTearsheetPage({ params }: { params: { slug: strin
           *Backtests and simulations are hypothetical. See &ldquo;How this could be wrong&rdquo; below for exhaustive assumptions and caveats.
         </div>
       </section>
+
+      {/* Flagship Interactive Engine for PRJ-002 */}
+      {project.id === "prj-002" && (
+        <section className="space-y-4">
+          <MonteCarloLab />
+        </section>
+      )}
+
+      {/* Flagship Interactive Replay for PRJ-003 */}
+      {project.id === "prj-003" && (
+        <section className="space-y-4">
+          <FraudReplay />
+        </section>
+      )}
+
+      {/* Flagship Interactive Thompson Sampling for PRJ-004 */}
+      {project.id === "prj-004" && (
+        <section className="space-y-4">
+          <ThompsonSimulator />
+        </section>
+      )}
 
       {/* Real Sample Output for PRJ-002 */}
       {project.id === "prj-002" && (
