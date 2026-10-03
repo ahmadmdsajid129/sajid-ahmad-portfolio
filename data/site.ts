@@ -7,6 +7,7 @@ export interface SiteConfig {
   tagline: string;
   pitch: string;
   location: string;
+  phone: string;
   availability: string;
   availableFrom: string;
   email: string;
@@ -19,20 +20,21 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: "Sajid Ahmad",
+  name: "MD SAJID AHMAD",
   firstName: "Sajid",
   initials: "SAJID",
   logoText: "SAJID // QUANT",
-  title: "Sajid Ahmad // Quantitative Research & Systems",
+  title: "MD Sajid Ahmad // Quantitative Research & Systems",
   tagline: "I turn noisy data into testable edges.",
   pitch:
     "I build and stress-test systematic trading and risk systems: a limit-order-book simulator, a Monte Carlo derivatives pricer, and a real-time fraud engine, all open source.",
-  location: "[[PLACEHOLDER: City, Country]]",
+  location: "Surat, Gujarat, India",
+  phone: "+91 7970872205",
   availability: "Open to quant research / trading / dev roles",
-  availableFrom: "[[PLACEHOLDER: Immediate / Q1 2027]]",
-  email: "[[PLACEHOLDER: your.email@domain.com]]",
+  availableFrom: "Immediate / 2026",
+  email: "ahmadmdsajid129@gmail.com",
   github: "https://github.com/ahmadmdsajid129",
-  linkedin: "[[PLACEHOLDER: https://linkedin.com/in/username]]",
+  linkedin: "https://www.linkedin.com/in/md-sajid-ahmad-350a9b32a/",
   resumeUrl: "/resume/Ahmad_Sajid_Resume.pdf",
   liveTrackRecordEnabled: false,
   version: "1.0.0",

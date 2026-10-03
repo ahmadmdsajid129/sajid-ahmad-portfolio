@@ -53,16 +53,24 @@ export default function ResumePage() {
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-4 font-mono text-xs text-text-muted print:text-gray-600 pt-1">
+          <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-text-muted print:text-gray-600 pt-1">
             <span>{siteConfig.location}</span>
             <span>&bull;</span>
-            <span>{siteConfig.email.replace("[[PLACEHOLDER: ", "").replace("]]", "")}</span>
+            <a href={`tel:${siteConfig.phone.replace(/\s+/g, "")}`} className="hover:text-accent print:text-gray-700">
+              {siteConfig.phone}
+            </a>
             <span>&bull;</span>
-            <a href={siteConfig.github} target="_blank" rel="noreferrer" className="underline">
+            <a href={`mailto:${siteConfig.email}`} className="hover:text-accent print:text-gray-700">
+              {siteConfig.email}
+            </a>
+            <span>&bull;</span>
+            <a href={siteConfig.github} target="_blank" rel="noreferrer" className="underline hover:text-accent">
               github.com/ahmadmdsajid129
             </a>
             <span>&bull;</span>
-            <span>{siteConfig.availability}</span>
+            <a href={siteConfig.linkedin} target="_blank" rel="noreferrer" className="underline hover:text-accent">
+              linkedin.com/in/md-sajid-ahmad-350a9b32a
+            </a>
           </div>
         </header>
 

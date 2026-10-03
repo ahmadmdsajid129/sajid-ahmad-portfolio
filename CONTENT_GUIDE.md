@@ -9,9 +9,9 @@ All global metadata lives in [`data/site.ts`](./data/site.ts). Modifying this fi
 
 ```typescript
 export const siteConfig = {
-  name: "Sajid Ahmad",
-  email: "your.real.email@domain.com",
-  location: "New York / London / Singapore",
+  name: "MD SAJID AHMAD",
+  email: "ahmadmdsajid129@gmail.com",
+  location: "Surat, Gujarat, India",
   availableFrom: "Immediate",
   // ...
 };

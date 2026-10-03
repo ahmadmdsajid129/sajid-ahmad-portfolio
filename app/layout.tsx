@@ -25,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ahmad Sajid // Quantitative Research & Systems",
+  title: "MD Sajid Ahmad // Quantitative Research & Systems",
   description:
     "Systematic trading research, limit order book simulation, Monte Carlo derivatives pricing, and real-time fraud engines.",
   keywords: [
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
     "Machine Learning",
     "XGBoost",
   ],
-  authors: [{ name: "Ahmad Sajid" }],
+  authors: [{ name: "MD Sajid Ahmad" }],
   openGraph: {
-    title: "Ahmad Sajid // Quantitative Research & Systems",
+    title: "MD Sajid Ahmad // Quantitative Research & Systems",
     description:
       "Turning noisy data into testable edges. Limit order book simulator, Monte Carlo pricer, real-time risk engine.",
     type: "website",
@@ -55,11 +55,22 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Sajid Ahmad",
-    alternateName: "Ahmad Sajid",
+    name: "MD Sajid Ahmad",
+    alternateName: ["Sajid Ahmad", "Ahmad Sajid"],
+    email: "mailto:ahmadmdsajid129@gmail.com",
+    telephone: "+917970872205",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Surat",
+      addressRegion: "Gujarat",
+      addressCountry: "India",
+    },
     url: "https://github.com/ahmadmdsajid129/sajid-ahmad-portfolio",
     jobTitle: "Quantitative Researcher & Systems Engineer",
-    sameAs: ["https://github.com/ahmadmdsajid129"],
+    sameAs: [
+      "https://github.com/ahmadmdsajid129",
+      "https://www.linkedin.com/in/md-sajid-ahmad-350a9b32a/",
+    ],
     knowsAbout: [
       "Quantitative Research",
       "Market Microstructure",

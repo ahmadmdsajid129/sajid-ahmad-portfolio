@@ -5,6 +5,7 @@ import { siteConfig } from "@/data/site";
 import { useToast } from "./toast-provider";
 import {
   Mail,
+  Phone,
   Github,
   Linkedin,
   ArrowDown,
@@ -25,14 +26,22 @@ export function ContactSection() {
   const [honeypot, setHoneypot] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
 
-  const cleanEmail = siteConfig.email.replace("[[PLACEHOLDER: ", "").replace("]]", "");
+  const cleanEmail = siteConfig.email;
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(cleanEmail);
     setCopiedEmail(true);
     addToast("Email copied to clipboard", "success", "MAIL");
     setTimeout(() => setCopiedEmail(false), 2000);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(siteConfig.phone);
+    setCopiedPhone(true);
+    addToast("Phone number copied to clipboard", "success", "TEL");
+    setTimeout(() => setCopiedPhone(false), 2000);
   };
 
   const handleResumeDownload = () => {
@@ -118,12 +127,15 @@ export function ContactSection() {
             </div>
 
             <p className="text-text-muted text-[11px] leading-relaxed">
-              Recruiters and researchers can copy my direct email or schedule a technical call.
+              Recruiters and researchers can copy my direct email, call, or schedule a technical discussion.
             </p>
 
             {/* Click to Copy Email */}
             <div className="p-3 bg-bg-inset border border-border rounded flex items-center justify-between">
-              <span className="text-text font-semibold">{cleanEmail}</span>
+              <a href={`mailto:${cleanEmail}`} className="text-text font-semibold hover:text-accent transition-colors flex items-center gap-2">
+                <Mail className="w-3.5 h-3.5 text-accent" />
+                <span>{cleanEmail}</span>
+              </a>
               <button
                 onClick={handleCopyEmail}
                 className="p-1.5 hover:text-accent text-text-faint transition-colors"
@@ -133,8 +145,23 @@ export function ContactSection() {
               </button>
             </div>
 
+            {/* Click to Call / Copy Phone */}
+            <div className="p-3 bg-bg-inset border border-border rounded flex items-center justify-between">
+              <a href={`tel:${siteConfig.phone.replace(/\s+/g, "")}`} className="text-text font-semibold hover:text-accent transition-colors flex items-center gap-2">
+                <Phone className="w-3.5 h-3.5 text-accent" />
+                <span>{siteConfig.phone}</span>
+              </a>
+              <button
+                onClick={handleCopyPhone}
+                className="p-1.5 hover:text-accent text-text-faint transition-colors"
+                title="Copy phone number"
+              >
+                {copiedPhone ? <Check className="w-4 h-4 text-up" /> : <Copy className="w-4 h-4" />}
+              </button>
+            </div>
+
             {/* Social Buttons */}
-            <div className="grid grid-cols-2 gap-2 pt-2">
+            <div className="grid grid-cols-2 gap-2 pt-1">
               <a
                 href={siteConfig.github}
                 target="_blank"
@@ -146,7 +173,7 @@ export function ContactSection() {
               </a>
 
               <a
-                href={siteConfig.linkedin.replace("[[PLACEHOLDER: ", "").replace("]]", "")}
+                href={siteConfig.linkedin}
                 target="_blank"
                 rel="noreferrer"
                 className="p-2.5 bg-bg-inset border border-border hover:border-accent text-text rounded flex items-center justify-center gap-2 transition-colors"
@@ -176,14 +203,26 @@ export function ContactSection() {
             </div>
           </div>
 
-          {/* Availability Card */}
-          <div className="terminal-panel p-4 bg-bg-inset border border-border font-mono text-xs space-y-2">
-            <div className="flex items-center gap-2 text-text font-bold">
-              <Clock className="w-4 h-4 text-accent" />
-              <span>TIMEZONE &amp; SLA</span>
+          {/* Location & Timezone Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+            <div className="terminal-panel p-4 bg-bg-inset border border-border font-mono text-xs space-y-1.5">
+              <div className="flex items-center gap-2 text-text font-bold">
+                <MapPin className="w-4 h-4 text-accent" />
+                <span>LOCATION BASE</span>
+              </div>
+              <div className="text-[11px] text-text-muted">
+                {siteConfig.location} &middot; Open to relocation &amp; remote.
+              </div>
             </div>
-            <div className="text-[11px] text-text-muted leading-relaxed">
-              Standard Response SLA: &lt; 24 business hours. Available for remote or relocation to major financial hubs.
+
+            <div className="terminal-panel p-4 bg-bg-inset border border-border font-mono text-xs space-y-1.5">
+              <div className="flex items-center gap-2 text-text font-bold">
+                <Clock className="w-4 h-4 text-accent" />
+                <span>TIMEZONE &amp; SLA</span>
+              </div>
+              <div className="text-[11px] text-text-muted leading-relaxed">
+                Standard Response SLA: &lt; 24 business hours (IST / UTC+5:30).
+              </div>
             </div>
           </div>
         </div>

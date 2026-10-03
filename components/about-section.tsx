@@ -206,7 +206,7 @@ export function AboutSection() {
               <div className="absolute inset-0 bg-accent/5 pointer-events-none" />
             </div>
             <div className="font-mono text-xs space-y-1">
-              <div className="text-text font-bold">Sajid Ahmad</div>
+              <div className="text-text font-bold">{siteConfig.name}</div>
               <div className="text-text-faint text-[10px]">
                 Quantitative Research &middot; Systems Architecture
               </div>

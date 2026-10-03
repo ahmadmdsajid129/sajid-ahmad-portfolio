@@ -138,8 +138,18 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
       category: "ACTION",
       description: "Copy researcher email to clipboard",
       action: () => {
-        navigator.clipboard.writeText(siteConfig.email.replace("[[PLACEHOLDER: ", "").replace("]]", ""));
+        navigator.clipboard.writeText(siteConfig.email);
         addToast("Email copied to clipboard", "success", "MAIL");
+      },
+    },
+    {
+      code: "TEL",
+      name: "Copy Phone Number",
+      category: "ACTION",
+      description: "Copy phone (+91 7970872205) to clipboard",
+      action: () => {
+        navigator.clipboard.writeText(siteConfig.phone);
+        addToast("Phone number copied to clipboard", "success", "TEL");
       },
     },
     {
@@ -157,8 +167,7 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
       category: "ACTION",
       description: "Open LinkedIn in new tab",
       action: () => {
-        const url = siteConfig.linkedin.replace("[[PLACEHOLDER: ", "").replace("]]", "");
-        window.open(url, "_blank");
+        window.open(siteConfig.linkedin, "_blank");
       },
     },
     {

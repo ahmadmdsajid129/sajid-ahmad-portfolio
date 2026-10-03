@@ -30,7 +30,7 @@ export function BootSequence() {
       "> INITIALIZING RESEARCH TERMINAL...",
       "> LOADING MATCHING ENGINE ........ OK",
       "> LOADING MONTE CARLO KERNEL ..... OK",
-      `> WELCOME, ${siteConfig.firstName.replace("[[PLACEHOLDER: ", "").replace("]]", "")}`,
+      `> WELCOME, ${siteConfig.name}`,
     ];
 
     const timeouts: NodeJS.Timeout[] = [];

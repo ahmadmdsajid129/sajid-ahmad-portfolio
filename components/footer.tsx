@@ -111,7 +111,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={siteConfig.linkedin.replace("[[PLACEHOLDER: ", "").replace("]]", "")}
+                  href={siteConfig.linkedin}
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-accent transition-colors flex items-center gap-2"
@@ -122,7 +122,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={`mailto:${siteConfig.email.replace("[[PLACEHOLDER: ", "").replace("]]", "")}`}
+                  href={`mailto:${siteConfig.email}`}
                   className="hover:text-accent transition-colors flex items-center gap-2"
                 >
                   <Mail className="w-3.5 h-3.5 text-text-faint" />
@@ -167,7 +167,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-6 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-text-faint">
           <div>
-            &copy; 2026 {siteConfig.name.replace("[[PLACEHOLDER: ", "").replace("]]", "")} &middot; Built with Next.js 14, TypeScript &amp; Tailwind CSS
+            &copy; 2026 {siteConfig.name} &middot; Built with Next.js 14, TypeScript &amp; Tailwind CSS
           </div>
           <div className="flex items-center gap-3">
             <span>Last deployed: {siteConfig.buildDate}</span>

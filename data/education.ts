@@ -28,7 +28,7 @@ export const educationData: EducationDegree[] = [
     degree: "Bachelor of Science",
     major: "Computer Science & Quantitative Methods [[PLACEHOLDER: confirm major]]",
     dateRange: "2021 - 2025 [[PLACEHOLDER: dates]]",
-    location: "[[PLACEHOLDER: City, Country]]",
+    location: "Surat, Gujarat, India",
     gpa: "[[PLACEHOLDER: GPA]]",
     coursework: [
       "Probability & Stochastic Processes",
