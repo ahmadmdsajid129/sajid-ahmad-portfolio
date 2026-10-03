@@ -9,7 +9,7 @@ interface KeyboardShortcutsProps {
   onOpenHelp: () => void;
 }
 
-const sectionIds = ["hero", "about", "projects", "live", "research", "education", "contact"];
+const sectionIds = ["hero", "about", "projects", "research", "education", "contact"];
 
 export function KeyboardShortcuts({ onOpenPalette, onOpenHelp }: KeyboardShortcutsProps) {
   const { toggleTheme, togglePhosphor } = useTheme();
@@ -63,8 +63,8 @@ export function KeyboardShortcuts({ onOpenPalette, onOpenHelp }: KeyboardShortcu
         return;
       }
 
-      // Number keys 1-7 to jump to sections
-      if (/^[1-7]$/.test(e.key)) {
+      // Number keys 1-6 to jump to sections
+      if (/^[1-6]$/.test(e.key)) {
         const index = parseInt(e.key, 10) - 1;
         const targetId = sectionIds[index];
         if (targetId) {

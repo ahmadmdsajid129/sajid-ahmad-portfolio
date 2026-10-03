@@ -8,7 +8,7 @@ export function EducationSection() {
   return (
     <section id="education" className="pt-20 border-t border-border space-y-12">
       <div>
-        <div className="section-label mb-2">05 | EDUCATION &amp; TRANSCRIPT</div>
+        <div className="section-label mb-2">04 | EDUCATION &amp; TRANSCRIPT</div>
         <h2 className="text-3xl md:text-5xl font-bold font-heading text-text tracking-tight">
           ACADEMIC RECORD <span className="text-accent">| COURSEWORK</span>
         </h2>

@@ -4,7 +4,6 @@ import React from "react";
 import { HeroSection } from "@/components/hero-section";
 import { AboutSection } from "@/components/about-section";
 import { ProjectsSection } from "@/components/projects-section";
-import { LiveTrackSection } from "@/components/live-track-section";
 import { ResearchSection } from "@/components/research-section";
 import { ExperienceSection } from "@/components/experience-section";
 import { EducationSection } from "@/components/education-section";
@@ -16,28 +15,25 @@ export default function HomePage() {
 
   return (
     <div className="space-y-16 py-4">
-      {/* 00 // HERO */}
+      {/* 00 | HERO */}
       <HeroSection onOpenMMGame={openMMGame} onOpenPalette={openPalette} />
 
-      {/* 01 // ABOUT & FACTSHEET */}
+      {/* 01 | ABOUT & FACTSHEET */}
       <AboutSection />
 
-      {/* 02 // PROJECTS & TEARSHEETS */}
+      {/* 02 | PROJECTS & TEARSHEETS */}
       <ProjectsSection />
 
-      {/* 03 // LIVE TRACK RECORD */}
-      <LiveTrackSection />
-
-      {/* 04 // RESEARCH & THE ANTI-PORTFOLIO */}
+      {/* 03 | RESEARCH & THE ANTI-PORTFOLIO */}
       <ResearchSection />
 
-      {/* EXPERIENCE // TRADE BLOTTER */}
+      {/* EXPERIENCE | TRADE BLOTTER */}
       <ExperienceSection />
 
-      {/* 05 // EDUCATION & TRANSCRIPT */}
+      {/* 04 | EDUCATION & TRANSCRIPT */}
       <EducationSection />
 
-      {/* 06 // CONTACT */}
+      {/* 05 | CONTACT */}
       <ContactSection />
     </div>
   );

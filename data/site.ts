@@ -14,7 +14,6 @@ export interface SiteConfig {
   github: string;
   linkedin: string;
   resumeUrl: string;
-  liveTrackRecordEnabled: boolean;
   version: string;
   buildDate: string;
 }
@@ -36,7 +35,6 @@ export const siteConfig: SiteConfig = {
   github: "https://github.com/ahmadmdsajid129",
   linkedin: "https://www.linkedin.com/in/md-sajid-ahmad-350a9b32a/",
   resumeUrl: "/resume/Ahmad_Sajid_Resume.pdf",
-  liveTrackRecordEnabled: false,
   version: "1.0.0",
   buildDate: "2026-10-03",
 };

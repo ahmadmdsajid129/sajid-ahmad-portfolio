@@ -18,10 +18,9 @@ interface NavItem {
 const navItems: NavItem[] = [
   { id: "about", code: "01", label: "ABOUT", href: "#about" },
   { id: "projects", code: "02", label: "PROJECTS", href: "#projects" },
-  { id: "live", code: "03", label: "LIVE", href: "#live" },
-  { id: "research", code: "04", label: "RESEARCH", href: "#research" },
-  { id: "education", code: "05", label: "EDUCATION", href: "#education" },
-  { id: "contact", code: "06", label: "CONTACT", href: "#contact" },
+  { id: "research", code: "03", label: "RESEARCH", href: "#research" },
+  { id: "education", code: "04", label: "EDUCATION", href: "#education" },
+  { id: "contact", code: "05", label: "CONTACT", href: "#contact" },
 ];
 
 interface NavbarProps {

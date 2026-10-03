@@ -93,23 +93,13 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
       },
     },
     {
-      code: "LIVE",
-      name: "Live Track Record",
-      category: "NAVIGATE",
-      description: "Cryptographically verifiable paper trading ledger",
-      action: () => {
-        router.push("#live");
-        addToast("Navigated to 03 // LIVE TRACK", "info", "LIVE");
-      },
-    },
-    {
       code: "FAIL",
       name: "The Anti-Portfolio",
       category: "NAVIGATE",
       description: "Strategies that failed and lessons learned",
       action: () => {
         router.push("#research");
-        addToast("Navigated to 04 // THE ANTI-PORTFOLIO", "info", "FAIL");
+        addToast("Navigated to 03 | THE ANTI-PORTFOLIO", "info", "FAIL");
       },
     },
     {
@@ -119,7 +109,7 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
       description: "Degree details, coursework, and reading",
       action: () => {
         router.push("#education");
-        addToast("Navigated to 05 // EDUCATION", "info", "EDU");
+        addToast("Navigated to 04 | EDUCATION", "info", "EDU");
       },
     },
     {

@@ -42,10 +42,9 @@ export function StatusBar() {
       hero: "00 | HERO",
       about: "01 | ABOUT",
       projects: "02 | PROJECTS",
-      live: "03 | LIVE TRACK",
-      research: "04 | RESEARCH",
-      education: "05 | EDUCATION",
-      contact: "06 | CONTACT",
+      research: "03 | RESEARCH",
+      education: "04 | EDUCATION",
+      contact: "05 | CONTACT",
     };
 
     const handleScroll = () => {

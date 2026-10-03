@@ -11,7 +11,7 @@ export function ResearchSection() {
     <section id="research" className="pt-20 border-t border-border space-y-16">
       {/* Header */}
       <div>
-        <div className="section-label mb-2">04 | RESEARCH &amp; NOTES</div>
+        <div className="section-label mb-2">03 | RESEARCH &amp; NOTES</div>
         <h2 className="text-3xl md:text-5xl font-bold font-heading text-text tracking-tight">
           THE ANTI-PORTFOLIO <span className="text-accent">| WHAT FAILED</span>
         </h2>

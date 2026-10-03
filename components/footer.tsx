@@ -66,26 +66,20 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#live" className="hover:text-accent transition-colors flex items-center gap-2">
-                  <span className="text-text-faint">03</span>
-                  <span>LIVE TRACK &lt;PAPER&gt;</span>
-                </Link>
-              </li>
-              <li>
                 <Link href="#research" className="hover:text-accent transition-colors flex items-center gap-2">
-                  <span className="text-text-faint">04</span>
+                  <span className="text-text-faint">03</span>
                   <span>ANTI-PORTFOLIO &lt;FAIL&gt;</span>
                 </Link>
               </li>
               <li>
                 <Link href="#education" className="hover:text-accent transition-colors flex items-center gap-2">
-                  <span className="text-text-faint">05</span>
+                  <span className="text-text-faint">04</span>
                   <span>EDUCATION &lt;TRANSCRIPT&gt;</span>
                 </Link>
               </li>
               <li>
                 <Link href="#contact" className="hover:text-accent transition-colors flex items-center gap-2">
-                  <span className="text-text-faint">06</span>
+                  <span className="text-text-faint">05</span>
                   <span>CONTACT &lt;MSG&gt;</span>
                 </Link>
               </li>
