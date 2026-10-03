@@ -2,6 +2,7 @@
 
 import React from "react";
 import { HeroSection } from "@/components/hero-section";
+import { ProjectsSection } from "@/components/projects-section";
 import { useShell } from "@/components/terminal-shell";
 
 export default function HomePage() {
@@ -19,12 +20,8 @@ export default function HomePage() {
         <p className="text-sm font-mono text-text-faint mt-1">Foundational section placeholder (Detailed in Phase 5)</p>
       </section>
 
-      {/* 02 // PROJECTS SECTION ANCHOR */}
-      <section id="projects" className="pt-16 border-t border-border/50">
-        <div className="section-label mb-2">02 // PROJECTS</div>
-        <h2 className="text-2xl font-bold font-heading text-text">RESEARCH &amp; BUILDS // TEARSHEETS</h2>
-        <p className="text-sm font-mono text-text-faint mt-1">Flagship models &amp; pricing engines (Detailed in Phase 3)</p>
-      </section>
+      {/* 02 // PROJECTS SECTION */}
+      <ProjectsSection />
 
       {/* 03 // LIVE TRACK RECORD SECTION ANCHOR */}
       <section id="live" className="pt-16 border-t border-border/50">

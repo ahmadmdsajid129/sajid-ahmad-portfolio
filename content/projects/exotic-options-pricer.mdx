@@ -1,0 +1,19 @@
+---
+title: "Exotic Options Pricing Engine + Web Client"
+code: "PRJ-002"
+type: "Quant"
+date: "2024"
+status: "Client-Server Verified"
+---
+
+# Exotic Options Pricing Engine + Web Client
+
+## Executive Summary
+A vectorized Monte Carlo valuation kernel pricing path-dependent derivatives under Geometric Brownian Motion (GBM), paired with closed-form Black-Scholes control variates and central difference Greeks.
+
+## Architecture
+- **Backend:** FastAPI, Python 3.11, pure NumPy vectorization across 100,000 diffusion trajectories.
+- **Frontend:** Next.js 14 App Router, TypeScript, Recharts, and interactive parameter exploration.
+
+## Variance Reduction
+Antithetic variates and closed-form European call control variates reduce standard error significantly compared to crude Monte Carlo at identical path counts.

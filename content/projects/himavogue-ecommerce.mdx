@@ -1,0 +1,28 @@
+---
+title: "HimaVogue: Multi-Vendor E-commerce Platform with Bespoke Tailoring"
+code: "PRJ-004"
+type: "Full-Stack"
+date: "2024"
+status: "Client Work"
+---
+
+# HimaVogue: Multi-Vendor E-Commerce Platform & Atelier
+
+## Executive Summary
+Full-stack monolithic marketplace built on Next.js 14 (App Router) and MongoDB, featuring a multi-vendor escrow ledger, split-order logistics, server-verified eSewa payments, and a bespoke tailoring quotation state machine.
+
+## Key Engineering Modules
+1. **Authentication:** Short-lived access token + long-lived bcrypt-hashed refresh token in MongoDB; silent refresh request queue preventing redundant token issuance.
+2. **Checkout Integrity:** 100% server-side price recalculation from MongoDB catalog; direct server-to-server validation of eSewa transaction receipts.
+3. **Split Orders:** Parent order with pro-rated discounts and coupon distribution across independent vendor child shipments.
+4. **Inventory Concurrency:** Atomic `$inc` on `variants.stockBySize` guarded by `$gte` balance filters to eliminate overselling under concurrent checkouts.
+5. **Wallet & Rewards Ledger:** Expiring point batches sorted by FIFO maturity; immediate deduction at draft creation with auditable mutation history.
+6. **Multi-Vendor Escrow:** Vendor balances held in `pendingClearance` until customer delivery and return period expiration.
+7. **Atelier State Machine:** Tailoring quotation negotiation with 48-hour fit alteration tracking.
+8. **Caching & Search:** Redis cache-aside with glob invalidation and graceful fallback; MiniSearch in-memory autocomplete.
+9. **Operations & Cron:** Scheduled cleanup of abandoned drafts, coupon distribution, and velocity scoring.
+10. **Headless Admin CMS:** Dynamic banner layouts, promotional campaigns, and interactive scratch card gamification.
+
+## Part B: Quant Lens on a Real Business
+- **Critique of Heuristic:** The static velocity score formula (`3*sales + 2*cart_adds + 1*views`) uses unnormalized arbitrary coefficients with cliff-edge epoch resets.
+- **Planned Quantitative Enhancements:** Walk-forward demand forecasting, Bayesian Thompson-sampling velocity ranking, and newsvendor inventory safety stock optimization.

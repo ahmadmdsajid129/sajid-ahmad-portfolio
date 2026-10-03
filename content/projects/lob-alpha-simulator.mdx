@@ -1,0 +1,20 @@
+---
+title: "LOB Alpha Simulator & Market-Making Engine"
+code: "PRJ-001"
+type: "Quant"
+date: "2024-2025"
+status: "OOS Evaluated"
+---
+
+# LOB Alpha Simulator & Market-Making Engine
+
+## Executive Summary
+An event-driven limit order book (LOB) simulator engineered in Python to evaluate microstructure alpha signals and passive quoting strategies under realistic execution frictions.
+
+## Key Microstructure Signals
+- **Order Book Imbalance (OBI):** Normalized difference between top bid and ask depth.
+- **Volume-Weighted Micro-Price:** Queue-weighted fair price estimator.
+- **Spread Dynamics:** Liquidity exhaustion metrics.
+
+## The Robustness Story
+Naive backtesting at mid-price produced unrealistic Sharpe ratios. After incorporating full bid-ask crossing and exchange taker fees, the edge evaporated. The model was pivoted to passive market making with adverse-selection penalty modeling: ~35% fill rate on winning quotes, 100% fill rate on toxic quotes, with a >60% probability threshold for directional skew.
