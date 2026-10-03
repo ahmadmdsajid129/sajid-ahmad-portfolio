@@ -11,9 +11,9 @@ export function ResearchSection() {
     <section id="research" className="pt-20 border-t border-border space-y-16">
       {/* Header */}
       <div>
-        <div className="section-label mb-2">04 // RESEARCH &amp; NOTES</div>
+        <div className="section-label mb-2">04 | RESEARCH &amp; NOTES</div>
         <h2 className="text-3xl md:text-5xl font-bold font-heading text-text tracking-tight">
-          THE ANTI-PORTFOLIO <span className="text-accent">// WHAT FAILED</span>
+          THE ANTI-PORTFOLIO <span className="text-accent">| WHAT FAILED</span>
         </h2>
         <p className="text-sm font-mono text-text-muted mt-2 max-w-2xl leading-relaxed">
           Anyone can show a cherry-picked backtest. The true measure of a quantitative researcher is knowing where their models break, why hypotheses died, and how execution frictions impact alpha.

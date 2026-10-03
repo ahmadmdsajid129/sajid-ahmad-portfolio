@@ -31,7 +31,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const project = projectsData.find((p) => p.slug === params.slug);
   if (!project) return { title: "Tearsheet Not Found" };
   return {
-    title: `${project.code}: ${project.title} // Tearsheet`,
+    title: `${project.code}: ${project.title} | Tearsheet`,
     description: project.oneLiner,
   };
 }
@@ -147,7 +147,7 @@ export default function ProjectTearsheetPage({ params }: { params: { slug: strin
       {/* 2. TL;DR Executive Box */}
       <section className="terminal-panel p-6 bg-bg-elevated border-l-4 border-l-accent border-border space-y-3 font-mono text-xs">
         <div className="text-accent font-bold text-sm uppercase tracking-wide">
-          TL;DR // EXECUTIVE SUMMARY
+          TL;DR | EXECUTIVE SUMMARY
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-text-muted leading-relaxed">
           <div>
@@ -226,7 +226,7 @@ export default function ProjectTearsheetPage({ params }: { params: { slug: strin
       {project.id === "prj-002" && (
         <section className="terminal-panel p-4 bg-bg-inset border border-border font-mono text-xs space-y-2">
           <div className="flex items-center justify-between text-text-faint border-b border-border pb-1 text-[11px]">
-            <span className="text-accent font-bold">TERMINAL OUTPUT // SAMPLE RUN, 100,000 PATHS</span>
+            <span className="text-accent font-bold">TERMINAL OUTPUT | SAMPLE RUN, 100,000 PATHS</span>
             <span>NUMPY KERNEL</span>
           </div>
           <pre className="text-text leading-relaxed text-[12px]">
@@ -479,7 +479,7 @@ def simulate_gbm_antithetic(S0, r, sigma, T, num_paths, steps):
       <section className="terminal-panel p-6 bg-bg-elevated border-l-4 border-l-warn border-border space-y-4 font-mono text-xs">
         <div className="flex items-center gap-2 text-warn font-bold text-sm">
           <AlertTriangle className="w-4 h-4" />
-          <span>HOW THIS COULD BE WRONG // ASSUMPTIONS &amp; LIMITATIONS</span>
+          <span>HOW THIS COULD BE WRONG | ASSUMPTIONS &amp; LIMITATIONS</span>
         </div>
         <p className="text-text-muted leading-relaxed">
           Quantitative honesty requires explicitly stating every structural assumption and model limitation. The following caveats apply to this tearsheet:

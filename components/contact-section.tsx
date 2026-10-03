@@ -109,9 +109,9 @@ export function ContactSection() {
   return (
     <section id="contact" className="pt-20 border-t border-border space-y-12">
       <div>
-        <div className="section-label mb-2">06 // CONTACT &amp; DIRECTORY</div>
+        <div className="section-label mb-2">06 | CONTACT &amp; DIRECTORY</div>
         <h2 className="text-3xl md:text-5xl font-bold font-heading text-text tracking-tight">
-          LET&apos;S TALK <span className="text-accent">// OPEN TO WORK</span>
+          LET&apos;S TALK <span className="text-accent">| OPEN TO WORK</span>
         </h2>
         <p className="text-sm font-mono text-text-muted mt-2 max-w-2xl">
           Available for quantitative research, algorithmic trading, and high-performance financial systems engineering roles.

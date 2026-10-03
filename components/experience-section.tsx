@@ -17,9 +17,9 @@ export function ExperienceSection() {
   return (
     <section id="experience" className="pt-20 border-t border-border space-y-10">
       <div>
-        <div className="section-label mb-2">EXPERIENCE // TRADE BLOTTER</div>
+        <div className="section-label mb-2">EXPERIENCE | TRADE BLOTTER</div>
         <h2 className="text-3xl md:text-5xl font-bold font-heading text-text tracking-tight">
-          CHRONOLOGICAL <span className="text-accent">// TIMELINE</span>
+          CHRONOLOGICAL <span className="text-accent">| TIMELINE</span>
         </h2>
         <p className="text-sm font-mono text-text-muted mt-2 max-w-2xl">
           Engineering roles and open-source quantitative system builds, grounded strictly in verifiable codebase implementations.

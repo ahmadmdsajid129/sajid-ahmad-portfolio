@@ -25,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MD Sajid Ahmad // Quantitative Research & Systems",
+  title: "MD Sajid Ahmad | Quantitative Research & Systems",
   description:
     "Systematic trading research, limit order book simulation, Monte Carlo derivatives pricing, and real-time fraud engines.",
   keywords: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "MD Sajid Ahmad" }],
   openGraph: {
-    title: "MD Sajid Ahmad // Quantitative Research & Systems",
+    title: "MD Sajid Ahmad | Quantitative Research & Systems",
     description:
       "Turning noisy data into testable edges. Limit order book simulator, Monte Carlo pricer, real-time risk engine.",
     type: "website",

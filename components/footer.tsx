@@ -15,7 +15,7 @@ export function Footer() {
 
   const handleVersionClick = () => {
     addToast(
-      "AGY-QUANT-TERMINAL :: BUILD 2026.10.03 // ZERO LEAKAGE // STRICT OOS",
+      "AGY-QUANT-TERMINAL :: BUILD 2026.10.03 | ZERO LEAKAGE | STRICT OOS",
       "success",
       "v1.0.0"
     );
@@ -31,7 +31,7 @@ export function Footer() {
             <div className="flex items-center text-sm font-bold text-text font-mono">
               <span className="text-text-faint">&gt; </span>
               <span className="text-accent font-bold">SAJID</span>
-              <span className="text-text-faint mx-1">//</span>
+              <span className="text-text-faint mx-2 text-xs font-normal">|</span>
               <span className="text-text">QUANT</span>
               <span className="inline-block w-2 h-3.5 bg-accent ml-1.5 animate-blink" />
             </div>
@@ -50,7 +50,7 @@ export function Footer() {
           {/* Col 2: Navigate with Function Codes */}
           <div className="space-y-3">
             <div className="text-text font-bold uppercase tracking-wider text-[11px] text-accent">
-              Directory // GO
+              Directory | GO
             </div>
             <ul className="space-y-2">
               <li>

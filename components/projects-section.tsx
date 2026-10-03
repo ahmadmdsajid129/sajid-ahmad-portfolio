@@ -33,9 +33,9 @@ export function ProjectsSection() {
       {/* Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
         <div>
-          <div className="section-label mb-2">02 // PROJECTS</div>
+          <div className="section-label mb-2">02 | PROJECTS</div>
           <h2 className="text-3xl md:text-5xl font-bold font-heading text-text tracking-tight">
-            RESEARCH &amp; BUILDS <span className="text-accent">// TEARSHEETS</span>
+            RESEARCH &amp; BUILDS <span className="text-accent">| TEARSHEETS</span>
           </h2>
           <p className="text-sm font-mono text-text-muted mt-2 max-w-2xl">
             Vectorized Monte Carlo kernels, high-frequency limit order book dynamics, and streaming ML risk engines. Evaluated with strict out-of-sample discipline.

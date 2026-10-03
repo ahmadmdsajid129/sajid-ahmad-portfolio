@@ -219,7 +219,7 @@ export function ThompsonSimulator() {
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
           <span className="font-bold text-sm text-text">
-            THOMPSON SAMPLING BANDIT // CONVERSION OPTIMIZATION
+            THOMPSON SAMPLING BANDIT | CONVERSION OPTIMIZATION
           </span>
           <span className="px-1.5 py-0.5 bg-bg-inset border border-border text-[10px] text-accent">
             BAYESIAN MAB

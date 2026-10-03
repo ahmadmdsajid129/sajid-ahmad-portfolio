@@ -64,9 +64,9 @@ export function LiveTrackSection() {
   return (
     <section id="live" className="pt-20 border-t border-border space-y-10">
       <div>
-        <div className="section-label mb-2">03 // LIVE TRACK RECORD</div>
+        <div className="section-label mb-2">03 | LIVE TRACK RECORD</div>
         <h2 className="text-3xl md:text-5xl font-bold font-heading text-text tracking-tight">
-          FORWARD TEST <span className="text-accent">// CRYPTOGRAPHIC AUDIT</span>
+          FORWARD TEST <span className="text-accent">| CRYPTOGRAPHIC AUDIT</span>
         </h2>
         <p className="text-sm font-mono text-text-muted mt-2 max-w-2xl">
           Verifiable paper trading ledger. Ahead of the opening bell, signal payloads are hashed with SHA-256 and committed to a public repository to prevent retrospective curve-fitting.
@@ -135,7 +135,7 @@ export function LiveTrackSection() {
       ) : (
         /* If Enabled: Live Blotter */
         <div className="terminal-panel p-6 bg-bg-elevated border border-border font-mono text-xs space-y-4">
-          <div className="text-up font-bold">FORWARD TEST ACTIVE // PAPER TRADING</div>
+          <div className="text-up font-bold">FORWARD TEST ACTIVE | PAPER TRADING</div>
           {/* Table of signals */}
         </div>
       )}

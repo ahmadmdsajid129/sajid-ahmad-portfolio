@@ -81,7 +81,7 @@ export function Navbar({ onOpenPalette }: NavbarProps) {
     <>
       <header className="sticky top-0 z-40 w-full h-14 bg-bg/85 backdrop-blur-md hairline-b transition-colors duration-200">
         <div className="max-w-[1200px] h-full mx-auto px-6 md:px-12 flex items-center justify-between">
-          {/* Left: Wordmark > SAJID // QUANT█ */}
+          {/* Left: Wordmark > SAJID | QUANT█ */}
           <button
             onClick={scrollToTop}
             aria-label="Scroll to top"
@@ -89,7 +89,7 @@ export function Navbar({ onOpenPalette }: NavbarProps) {
           >
             <span className="text-text-faint">&gt; </span>
             <span className="text-accent font-bold">SAJID</span>
-            <span className="text-text-faint mx-1">//</span>
+            <span className="text-text-faint mx-2 text-xs font-normal">|</span>
             <span className="text-text">QUANT</span>
             <span className="inline-block w-2 h-3.5 bg-accent ml-1.5 animate-blink" />
           </button>

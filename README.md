@@ -1,4 +1,4 @@
-# MD Sajid Ahmad // Quantitative Research & Systems Terminal
+# MD Sajid Ahmad | Quantitative Research & Systems Terminal
 
 [![Next.js 14](https://img.shields.io/badge/Next.js-14.2-black?style=flat&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)

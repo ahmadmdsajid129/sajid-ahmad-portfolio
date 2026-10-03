@@ -68,9 +68,9 @@ export function AboutSection() {
     <section id="about" className="pt-20 border-t border-border space-y-16">
       {/* 1. Header & DES <GO> Factsheet */}
       <div>
-        <div className="section-label mb-2">01 // ABOUT</div>
+        <div className="section-label mb-2">01 | ABOUT</div>
         <h2 className="text-3xl md:text-5xl font-bold font-heading text-text tracking-tight">
-          PROFILE <span className="text-accent">// DES &lt;GO&gt;</span>
+          PROFILE <span className="text-accent">| DES &lt;GO&gt;</span>
         </h2>
       </div>
 
@@ -107,7 +107,7 @@ export function AboutSection() {
           {/* 5-Step "How I Research" Stepper */}
           <div className="pt-4 space-y-3 font-mono">
             <div className="text-xs font-bold text-accent uppercase tracking-wider">
-              HOW I RESEARCH // 5-STAGE PIPELINE
+              HOW I RESEARCH | 5-STAGE PIPELINE
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 text-xs">
               {researchSteps.map((s, idx) => (
@@ -116,7 +116,7 @@ export function AboutSection() {
                   className="p-3 bg-bg-inset border border-border rounded flex flex-col justify-between group hover:border-accent transition-colors"
                 >
                   <div>
-                    <div className="text-[10px] text-text-faint">{s.num} //</div>
+                    <div className="text-[10px] text-text-faint">{s.num} |</div>
                     <div className="font-bold text-text group-hover:text-accent mt-0.5">
                       {s.step}
                     </div>
@@ -223,7 +223,7 @@ export function AboutSection() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-mono">
           <div>
             <div className="text-xs font-bold text-accent uppercase tracking-wider">
-              QUANTITATIVE SKILLS // FACTOR EXPOSURES
+              QUANTITATIVE SKILLS | FACTOR EXPOSURES
             </div>
             <div className="text-[11px] text-text-faint mt-0.5">
               Empirical competencies mapped to real codebase implementations

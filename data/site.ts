@@ -23,8 +23,8 @@ export const siteConfig: SiteConfig = {
   name: "MD SAJID AHMAD",
   firstName: "Sajid",
   initials: "SAJID",
-  logoText: "SAJID // QUANT",
-  title: "MD Sajid Ahmad // Quantitative Research & Systems",
+  logoText: "SAJID | QUANT",
+  title: "MD SAJID AHMAD | Quantitative Research & Systems",
   tagline: "I turn noisy data into testable edges.",
   pitch:
     "I build and stress-test systematic trading and risk systems: a limit-order-book simulator, a Monte Carlo derivatives pricer, and a real-time fraud engine, all open source.",

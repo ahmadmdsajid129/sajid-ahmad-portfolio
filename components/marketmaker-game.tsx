@@ -133,7 +133,7 @@ export function MarketMakerGame({ isOpen, onClose }: MarketMakerGameProps) {
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
             <span className="font-bold text-sm text-text">
-              MARKET MAKER SIMULATOR // ADVERSE SELECTION TEST
+              MARKET MAKER SIMULATOR | ADVERSE SELECTION TEST
             </span>
           </div>
           <div className="flex items-center gap-3">
@@ -285,7 +285,7 @@ export function MarketMakerGame({ isOpen, onClose }: MarketMakerGameProps) {
           </div>
 
           <div className="text-[10px] text-text-faint">
-            TICKING REAL-TIME // WEB WORKER ENGINE
+            TICKING REAL-TIME | WEB WORKER ENGINE
           </div>
         </div>
       </div>

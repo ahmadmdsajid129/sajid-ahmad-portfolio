@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 export function StatusBar() {
-  const [sectionCode, setSectionCode] = useState("00 // OVERVIEW");
+  const [sectionCode, setSectionCode] = useState("00 | OVERVIEW");
   const [utcTime, setUtcTime] = useState("");
   const [istTime, setIstTime] = useState("");
 
@@ -39,13 +39,13 @@ export function StatusBar() {
   // Track active section for status bar display
   useEffect(() => {
     const sectionMap: Record<string, string> = {
-      hero: "00 // HERO",
-      about: "01 // ABOUT",
-      projects: "02 // PROJECTS",
-      live: "03 // LIVE TRACK",
-      research: "04 // RESEARCH",
-      education: "05 // EDUCATION",
-      contact: "06 // CONTACT",
+      hero: "00 | HERO",
+      about: "01 | ABOUT",
+      projects: "02 | PROJECTS",
+      live: "03 | LIVE TRACK",
+      research: "04 | RESEARCH",
+      education: "05 | EDUCATION",
+      contact: "06 | CONTACT",
     };
 
     const handleScroll = () => {
@@ -59,7 +59,7 @@ export function StatusBar() {
           return;
         }
       }
-      setSectionCode("00 // OVERVIEW");
+      setSectionCode("00 | OVERVIEW");
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });

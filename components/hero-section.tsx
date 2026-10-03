@@ -118,7 +118,7 @@ export function HeroSection({ onOpenMMGame, onOpenPalette }: HeroSectionProps) {
           {/* Eyebrow */}
           <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-bg-elevated border border-border text-accent text-[11px] font-mono tracking-wider">
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            <span>QUANTITATIVE RESEARCH // MARKET MICROSTRUCTURE // DERIVATIVES PRICING // ML SYSTEMS</span>
+            <span>QUANTITATIVE RESEARCH | MARKET MICROSTRUCTURE | DERIVATIVES PRICING | ML SYSTEMS</span>
           </div>
 
           {/* Mask-Reveal H1 */}
