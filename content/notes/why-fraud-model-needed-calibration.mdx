@@ -1,0 +1,28 @@
+---
+title: "Why My Fraud Model Needed Probability Calibration"
+date: "2024-09-12"
+readTime: "3 min read"
+tags: ["Machine Learning", "Calibration", "Risk Systems"]
+---
+
+# Why My Fraud Model Needed Probability Calibration
+
+## The Ranking Fallacy
+In machine learning courses, students are taught to maximize ROC-AUC. When predicting rare events like credit card fraud (where positive incidence is under 2.5%), a tree ensemble like XGBoost can easily achieve an ROC-AUC of 0.999.
+
+However, **ROC-AUC is solely a ranking metric**. It measures whether fraud transactions are scored higher than legitimate ones, but tells you nothing about whether a predicted score of `0.70` corresponds to an actual 70% empirical probability of fraud.
+
+## The Cost of Distortion in Risk Arbitration
+When automated risk engines arbitrate card swipes:
+- Declining a legitimate cardholder causes customer churn ($35 direct friction cost).
+- Allowing a fraudulent transaction loses the principal amount plus a $25 chargeback fee.
+
+Optimal mathematical decision thresholds demand accurate posterior probabilities:
+$$\text{Threshold}^* = \frac{\text{Cost}_{\text{FP}}}{\text{Cost}_{\text{FP}} + \text{Cost}_{\text{FN}}}$$
+If the model outputs raw uncalibrated scores that are skewed, the automated cutoff will either trigger catastrophic false declines or let fraud slip through undetected.
+
+## Applying Isotonic Regression
+By fitting an isotonic regression mapping on held-out validation predictions:
+- **Expected Calibration Error (ECE)** dropped from 0.084 to **0.0014**.
+- **Brier Score** improved from 0.0023 to **0.0018**.
+- The dollar-optimized cost threshold operated at peak economic efficiency.

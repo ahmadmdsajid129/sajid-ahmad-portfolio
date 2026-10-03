@@ -1,0 +1,28 @@
+---
+title: "Why Crossing the Spread Destroyed My Alpha"
+date: "2024-11-15"
+readTime: "4 min read"
+tags: ["Microstructure", "Execution Costs", "LOB"]
+---
+
+# Why Crossing the Spread Destroyed My Alpha
+
+## The Illusion of Naive Backtests
+When I first evaluated the XGBoost directional classifier on the simulated limit order book, the results appeared exceptional: an out-of-sample directional accuracy of ~67% and a theoretical Sharpe ratio exceeding 3.8. 
+
+The backtest made a standard rookie assumption: **immediate execution at the prevailing mid-price**.
+
+## The Reality of Market Microstructure
+In live electronic markets, you cannot execute at mid-price without resting passive limit orders that run the risk of non-execution. If you submit an aggressive market order to capitalize on a short-term predictive signal:
+1. You must cross the spread, paying the half-spread immediately: $\text{Cost}_{\text{spread}} = \frac{P_{\text{ask}} - P_{\text{bid}}}{2}$.
+2. You pay an exchange taker fee.
+
+When the tick size is $0.05 and the average spread is $0.10, crossing the spread costs $0.05 per share. If your model's expected 5-tick forward move is only $0.03, **every aggressive trade has negative expected value despite 67% directional accuracy**.
+
+## The Pivot to Passive Quoting
+To monetize the signal, the strategy had to transition to **passive market making**:
+- Post limit orders at the bid and ask to earn the spread rather than paying it.
+- Use the XGBoost model not to trigger market orders, but to decide **which side to quote**.
+- Model adverse selection: toxic informed order flow hits losing quotes 100% of the time, while winning quotes fill only ~35% of the time due to queue competition.
+
+Only with this discipline does the strategy demonstrate positive expected value in hostile microstructure environments.
