@@ -117,10 +117,19 @@ export function EducationSection() {
                   </div>
                   <div className="flex items-center justify-between text-[10px]">
                     <span className="text-text-muted">{cert.issuer}</span>
-                    <span className="text-accent hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>VERIFY</span>
-                      <ExternalLink className="w-2.5 h-2.5" />
-                    </span>
+                    {cert.verifyUrl ? (
+                      <a
+                        href={cert.verifyUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-accent hover:underline flex items-center gap-1"
+                      >
+                        <span>VERIFY</span>
+                        <ExternalLink className="w-2.5 h-2.5" />
+                      </a>
+                    ) : (
+                      <span className="text-text-faint">VERIFIED</span>
+                    )}
                   </div>
                 </div>
               ))}
@@ -129,9 +138,9 @@ export function EducationSection() {
 
           {/* Academic Statement */}
           <div className="p-4 bg-bg-inset border border-border rounded font-mono text-[11px] text-text-muted leading-relaxed space-y-2">
-            <div className="text-accent font-bold uppercase">ACADEMIC FOUNDATION:</div>
+            <div className="text-accent font-bold uppercase">PHYSICS &amp; QUANT SYNTHESIS:</div>
             <p>
-              Emphasis on rigorous discrete algorithms, numerical linear algebra, and measure-theoretic probability. All coursework projects were completed with peer review and verifiable Git repositories.
+              Mathematical physics curriculum (differential equations, statistical mechanics, Hamiltonian dynamics, stochastic modeling) coupled with self-directed software engineering in data structures, algorithms, and high-performance backend systems.
             </p>
           </div>
         </div>

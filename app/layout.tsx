@@ -67,6 +67,10 @@ export default function RootLayout({
     },
     url: "https://github.com/ahmadmdsajid129/sajid-ahmad-portfolio",
     jobTitle: "Quantitative Researcher & Systems Engineer",
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "Sardar Vallabhbhai National Institute of Technology, Surat (SVNIT Surat)",
+    },
     sameAs: [
       "https://github.com/ahmadmdsajid129",
       "https://www.linkedin.com/in/md-sajid-ahmad-350a9b32a/",

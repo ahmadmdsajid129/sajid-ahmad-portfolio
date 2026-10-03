@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { siteConfig } from "@/data/site";
 import { projectsData } from "@/data/projects";
-import { educationData } from "@/data/education";
+import { educationData, certificationsData } from "@/data/education";
 import { experienceData } from "@/data/experience";
 import { skillsData } from "@/data/skills";
 import { ArrowLeft, Printer, Download } from "lucide-react";
@@ -150,22 +150,63 @@ export default function ResumePage() {
         </section>
 
         {/* Education */}
-        <section className="space-y-2">
+        <section className="space-y-3">
           <h2 className="text-xs font-bold text-accent print:text-black uppercase tracking-wider border-b border-border/40 pb-1 font-mono">
             Education
           </h2>
 
           {educationData.map((edu, idx) => (
-            <div key={idx} className="flex justify-between items-baseline text-xs font-mono">
-              <div>
-                <span className="font-bold text-text print:text-black">{edu.institution}</span> &mdash;{" "}
-                <span className="text-text-muted print:text-gray-700">
-                  {edu.degree}, {edu.major}
-                </span>
+            <div key={idx} className="space-y-1.5 text-xs">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline font-mono gap-1">
+                <div>
+                  <span className="font-bold text-text print:text-black">{edu.institution}</span> &mdash;{" "}
+                  <span className="text-accent print:text-gray-700">
+                    {edu.degree}, {edu.major}
+                  </span>
+                </div>
+                <div className="text-text-faint print:text-gray-500 text-[11px] shrink-0">{edu.dateRange}</div>
               </div>
-              <div className="text-text-faint print:text-gray-500">{edu.dateRange}</div>
+              <div className="flex items-center gap-3 text-text-muted print:text-gray-600 font-mono text-[11px]">
+                <span>Cumulative CGPA: <strong className="text-text print:text-black">{edu.gpa}</strong></span>
+                <span>&bull;</span>
+                <span>{edu.location}</span>
+              </div>
+              <div className="text-[11px] text-text-muted print:text-gray-600 leading-relaxed">
+                <strong className="text-text print:text-black">Relevant Coursework:</strong> {edu.coursework.join(" \u00B7 ")}
+              </div>
             </div>
           ))}
+        </section>
+
+        {/* Certifications */}
+        <section className="space-y-2">
+          <h2 className="text-xs font-bold text-accent print:text-black uppercase tracking-wider border-b border-border/40 pb-1 font-mono">
+            Certifications &amp; Credentials
+          </h2>
+
+          <div className="space-y-2 text-xs font-mono">
+            {certificationsData.map((cert, idx) => (
+              <div key={idx} className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1">
+                <div>
+                  <span className="font-bold text-text print:text-black">{cert.name}</span>
+                  <span className="text-text-faint print:text-gray-500 text-[11px]"> &mdash; {cert.issuer}</span>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="text-text-faint print:text-gray-500 text-[11px]">{cert.year}</span>
+                  {cert.verifyUrl && (
+                    <a
+                      href={cert.verifyUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-accent underline text-[10px] print:hidden"
+                    >
+                      [VERIFY]
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
     </div>

@@ -24,42 +24,43 @@ export interface ReadingItem {
 
 export const educationData: EducationDegree[] = [
   {
-    institution: "[[PLACEHOLDER: Institution / University Name]]",
-    degree: "Bachelor of Science",
-    major: "Computer Science & Quantitative Methods [[PLACEHOLDER: confirm major]]",
-    dateRange: "2021 - 2025 [[PLACEHOLDER: dates]]",
+    institution: "Sardar Vallabhbhai National Institute of Technology, Surat (SVNIT Surat)",
+    degree: "Integrated Master of Science (5-Year M.Sc.)",
+    major: "Physics",
+    dateRange: "2024 - 2029 (Expected) • 3rd Year / 5th Sem",
     location: "Surat, Gujarat, India",
-    gpa: "[[PLACEHOLDER: GPA]]",
+    gpa: "7.12 / 10.0 CGPA",
     coursework: [
-      "Probability & Stochastic Processes",
-      "Linear Algebra & Matrix Decompositions",
-      "Design & Analysis of Algorithms",
-      "Numerical Analysis & Scientific Computing",
-      "Machine Learning & Statistical Pattern Recognition",
-      "Database Systems & Distributed Storage",
-      "Computer Systems & Architecture",
+      "Mathematical Physics (ODEs, PDEs, Complex Analysis)",
+      "Statistical Mechanics & Stochastic Thermodynamics",
+      "Computational Physics & Numerical Methods",
+      "Classical Mechanics & Dynamical Systems",
+      "Quantum Mechanics & Linear Vector Spaces",
+      "Electrodynamics & Field Theory",
+      "Data Structures & Algorithms in Python",
+      "Backend Engineering & Relational Database Design",
     ],
   },
 ];
 
 export const certificationsData: Certification[] = [
   {
-    name: "Machine Learning Specialization",
-    issuer: "DeepLearning.AI / Coursera",
-    year: "2024",
-    verifyUrl: "[[PLACEHOLDER: verify link]]",
+    name: "The Complete Data Structures and Algorithms Course in Python",
+    issuer: "Udemy (Elshad Karimov) • 46.5 hrs",
+    year: "2025",
+    verifyUrl: "https://www.udemy.com/certificate/UC-51e18fa4-2106-4b9e-a7d1-bf0e0791d725/",
   },
   {
-    name: "Data Structures and Algorithms",
-    issuer: "UC San Diego",
-    year: "2023",
-    verifyUrl: "[[PLACEHOLDER: verify link]]",
+    name: "Introduction to Back-End Development",
+    issuer: "Meta / Coursera",
+    year: "2025",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/verify/SOHOCWKF6QUL",
   },
   {
-    name: "Financial Engineering & Risk Management",
-    issuer: "Columbia University [[PLACEHOLDER: confirm]]",
-    year: "2024",
-    verifyUrl: "[[PLACEHOLDER: verify link]]",
+    name: "Python Django - The Practical Guide",
+    issuer: "Udemy (Maximilian Schwarzmüller) • 23 hrs",
+    year: "2025",
+    verifyUrl: "https://www.udemy.com/certificate/UC-83ac043e-8cd1-4a5e-b401-d14bee474a48/",
   },
 ];
 
