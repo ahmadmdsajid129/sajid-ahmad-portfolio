@@ -223,7 +223,7 @@ export function Navbar({ onOpenPalette }: NavbarProps) {
                 href={siteConfig.github}
                 target="_blank"
                 rel="noreferrer"
-                className="text-accent underline"
+                className="text-accent hover:brightness-125 font-semibold transition-all"
               >
                 GITHUB &nearr;
               </a>

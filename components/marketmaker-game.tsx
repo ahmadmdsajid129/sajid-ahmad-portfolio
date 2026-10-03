@@ -139,7 +139,7 @@ export function MarketMakerGame({ isOpen, onClose }: MarketMakerGameProps) {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowHowItWorks(!showHowItWorks)}
-              className="text-[11px] text-accent hover:underline"
+              className="text-[11px] text-accent hover:brightness-125 transition-all"
             >
               {showHowItWorks ? "HIDE NOTES" : "HOW IT WORKS"}
             </button>

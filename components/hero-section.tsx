@@ -135,7 +135,7 @@ export function HeroSection({ onOpenMMGame, onOpenPalette }: HeroSectionProps) {
               initial={{ y: "100%", opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.1, ease: [0.2, 0.8, 0.2, 1] }}
-              className="text-accent underline decoration-accent/30 underline-offset-8"
+              className="text-accent"
             >
               testable edges.
             </motion.div>

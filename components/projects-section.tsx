@@ -215,7 +215,7 @@ export function ProjectsSection() {
               <div className="pt-6 mt-6 border-t border-border flex items-center justify-between font-mono text-xs">
                 <Link
                   href={`/projects/${project.slug}`}
-                  className="inline-flex items-center gap-1.5 text-accent font-bold hover:underline"
+                  className="inline-flex items-center gap-1.5 text-accent font-bold hover:brightness-125 transition-all"
                 >
                   <span>TEARSHEET &rarr;</span>
                 </Link>

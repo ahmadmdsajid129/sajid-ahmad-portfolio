@@ -16,7 +16,7 @@ export default function ResumePage() {
       <div className="flex items-center justify-between font-mono text-xs border-b border-border pb-4 mb-8 print:hidden">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-accent hover:underline font-semibold"
+          className="inline-flex items-center gap-1.5 text-accent hover:brightness-125 font-semibold transition-all"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>&larr; BACK TO DASHBOARD</span>
@@ -64,11 +64,11 @@ export default function ResumePage() {
               {siteConfig.email}
             </a>
             <span>&bull;</span>
-            <a href={siteConfig.github} target="_blank" rel="noreferrer" className="underline hover:text-accent">
+            <a href={siteConfig.github} target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
               github.com/ahmadmdsajid129
             </a>
             <span>&bull;</span>
-            <a href={siteConfig.linkedin} target="_blank" rel="noreferrer" className="underline hover:text-accent">
+            <a href={siteConfig.linkedin} target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
               linkedin.com/in/md-sajid-ahmad-350a9b32a
             </a>
           </div>
@@ -198,7 +198,7 @@ export default function ResumePage() {
                       href={cert.verifyUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-accent underline text-[10px] print:hidden"
+                      className="text-accent hover:brightness-125 text-[10px] print:hidden transition-all"
                     >
                       [VERIFY]
                     </a>

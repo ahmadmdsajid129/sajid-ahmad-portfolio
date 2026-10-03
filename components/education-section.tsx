@@ -122,7 +122,7 @@ export function EducationSection() {
                         href={cert.verifyUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-accent hover:underline flex items-center gap-1"
+                        className="text-accent hover:brightness-125 flex items-center gap-1 transition-all"
                       >
                         <span>VERIFY</span>
                         <ExternalLink className="w-2.5 h-2.5" />

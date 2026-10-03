@@ -336,7 +336,7 @@ export function FraudReplay() {
           href="https://github.com/ahmadmdsajid129/real-time-payment-fraud-detection"
           target="_blank"
           rel="noreferrer"
-          className="text-accent hover:underline flex items-center gap-1"
+          className="text-accent hover:brightness-125 flex items-center gap-1 transition-all"
         >
           <span>View Kafka &amp; Redis Pipeline in Repo</span>
           <ExternalLink className="w-3 h-3" />

@@ -164,7 +164,7 @@ export function ContactSection() {
               </a>
               <div className="flex items-center justify-between text-[10px] text-text-faint mt-2">
                 <span>PDF &middot; Updated {siteConfig.buildDate}</span>
-                <a href="/resume" className="text-accent hover:underline">
+                <a href="/resume" className="text-accent hover:brightness-125 transition-all">
                   VIEW ONLINE CV &rarr;
                 </a>
               </div>

@@ -183,7 +183,7 @@ export function AboutSection() {
                 <span className="text-text-faint">EMAIL</span>
                 <button
                   onClick={copyEmail}
-                  className="inline-flex items-center gap-1.5 text-accent hover:underline text-[11px]"
+                  className="inline-flex items-center gap-1.5 text-accent hover:brightness-125 text-[11px] transition-all"
                 >
                   {copiedEmail ? (
                     <Check className="w-3.5 h-3.5 text-up" />

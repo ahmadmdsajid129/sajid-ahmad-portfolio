@@ -98,7 +98,7 @@ export function ResearchSection() {
                 <div className="pt-2 border-t border-border/40 flex items-center justify-between text-[11px]">
                   <Link
                     href={entry.projectLink}
-                    className="text-accent hover:underline flex items-center gap-1 font-semibold"
+                    className="text-accent hover:brightness-125 flex items-center gap-1 font-semibold transition-all"
                   >
                     <span>VIEW RELATED PROJECT TEARSHEET</span>
                     <ArrowRight className="w-3.5 h-3.5" />

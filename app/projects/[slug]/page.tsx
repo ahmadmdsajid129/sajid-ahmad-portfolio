@@ -54,7 +54,7 @@ export default function ProjectTearsheetPage({ params }: { params: { slug: strin
       <div className="flex items-center justify-between font-mono text-xs border-b border-border pb-4">
         <Link
           href="/#projects"
-          className="inline-flex items-center gap-1.5 text-accent hover:underline font-semibold"
+          className="inline-flex items-center gap-1.5 text-accent hover:brightness-125 font-semibold transition-all"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>&larr; ALL PROJECTS / TEARSHEETS</span>

@@ -40,7 +40,7 @@ export function Footer() {
             </p>
             <button
               onClick={scrollToTop}
-              className="inline-flex items-center gap-1.5 text-accent hover:underline pt-2"
+              className="inline-flex items-center gap-1.5 text-accent hover:brightness-125 pt-2 transition-all"
             >
               <span>BACK TO TOP</span>
               <ArrowUp className="w-3.5 h-3.5" />
@@ -168,7 +168,7 @@ export function Footer() {
             <span>&middot;</span>
             <button
               onClick={handleVersionClick}
-              className="text-accent hover:underline focus:outline-none"
+              className="text-accent hover:brightness-125 focus:outline-none transition-all"
               title="Click for build verification banner"
             >
               v{siteConfig.version}
