@@ -14,7 +14,6 @@ import {
   Copy,
   Clock,
   MapPin,
-  ExternalLink,
   Shield,
 } from "lucide-react";
 
@@ -74,37 +73,6 @@ export function ContactSection() {
       addToast("Message dispatched to email client", "success", "SENT");
     }, 1000);
   };
-
-  const pinnedRepos = [
-    {
-      name: "lob-alpha-simulator",
-      desc: "Event-driven limit order book simulator with OBI and passive MM adverse-selection backtesting.",
-      lang: "Python",
-      stars: "Open Source",
-      url: "https://github.com/ahmadmdsajid129/lob-alpha-simulator",
-    },
-    {
-      name: "exotic-options-pricer",
-      desc: "Vectorized Monte Carlo engine pricing exotics with variance reduction and Greeks.",
-      lang: "Python / NumPy",
-      stars: "Open Source",
-      url: "https://github.com/ahmadmdsajid129/exotic-options-pricer",
-    },
-    {
-      name: "real-time-payment-fraud-detection",
-      desc: "Streaming fraud scoring pipeline with calibrated XGBoost, Redis ZSETs, and TreeSHAP.",
-      lang: "Python / Kafka",
-      stars: "61/61 Tests",
-      url: "https://github.com/ahmadmdsajid129/real-time-payment-fraud-detection",
-    },
-    {
-      name: "sajid-ahmad-portfolio",
-      desc: "Quantitative research terminal website built with Next.js 14 App Router and Web Workers.",
-      lang: "TypeScript",
-      stars: "v1.0.0",
-      url: "https://github.com/ahmadmdsajid129/sajid-ahmad-portfolio",
-    },
-  ];
 
   return (
     <section id="contact" className="pt-20 border-t border-border space-y-12">
@@ -302,53 +270,6 @@ export function ContactSection() {
               <span>{isSubmitting ? "TRANSMITTING..." : "SEND TRANSMISSION ⏎"}</span>
             </button>
           </form>
-        </div>
-      </div>
-
-      {/* GitHub Activity / Pinned Repositories Widget */}
-      <div className="space-y-4 pt-6 border-t border-border">
-        <div className="flex items-center justify-between font-mono text-xs">
-          <div className="flex items-center gap-2 font-bold text-text uppercase">
-            <Github className="w-4 h-4 text-accent" />
-            <span>PINNED REPOSITORIES // GITHUB ACTIVITY</span>
-          </div>
-          <a
-            href={siteConfig.github}
-            target="_blank"
-            rel="noreferrer"
-            className="text-text-faint hover:text-accent transition-colors flex items-center gap-1 text-[11px]"
-          >
-            <span>VIEW ALL ON GITHUB</span>
-            <ExternalLink className="w-3 h-3" />
-          </a>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
-          {pinnedRepos.map((repo) => (
-            <a
-              key={repo.name}
-              href={repo.url}
-              target="_blank"
-              rel="noreferrer"
-              className="terminal-panel p-4 bg-bg-elevated border border-border hover:border-accent transition-all flex flex-col justify-between space-y-3 group"
-            >
-              <div>
-                <div className="font-bold text-text group-hover:text-accent transition-colors truncate">
-                  {repo.name}
-                </div>
-                <div className="text-[11px] text-text-faint mt-1 line-clamp-3 leading-relaxed">
-                  {repo.desc}
-                </div>
-              </div>
-              <div className="flex items-center justify-between text-[10px] text-text-faint pt-2 border-t border-border/40">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-accent" />
-                  <span>{repo.lang}</span>
-                </span>
-                <span className="text-accent">{repo.stars}</span>
-              </div>
-            </a>
-          ))}
         </div>
       </div>
     </section>
