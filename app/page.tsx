@@ -1,50 +1,16 @@
+"use client";
+
 import React from "react";
-import Link from "next/link";
-import { siteConfig } from "@/data/site";
-import { ArrowRight, Terminal, Shield, Zap, TrendingUp } from "lucide-react";
+import { HeroSection } from "@/components/hero-section";
+import { useShell } from "@/components/terminal-shell";
 
 export default function HomePage() {
+  const { openMMGame, openPalette } = useShell();
+
   return (
-    <div className="space-y-24 py-8">
-      {/* 00 // HERO SECTION ANCHOR */}
-      <section id="hero" className="min-h-[75vh] flex flex-col justify-center pt-8">
-        <div className="space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-bg-elevated border border-border text-accent text-xs font-mono">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            <span>QUANTITATIVE RESEARCH // MARKET MICROSTRUCTURE // DERIVATIVES PRICING // ML SYSTEMS</span>
-          </div>
-
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold font-heading tracking-tight leading-[1.08]">
-            I turn noisy data into <span className="text-accent underline decoration-accent/40 underline-offset-8">testable edges.</span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-text-muted max-w-2xl font-normal leading-relaxed">
-            {siteConfig.pitch}
-          </p>
-
-          <div className="pt-4 flex flex-wrap items-center gap-4">
-            <a
-              href="#projects"
-              className="h-12 px-6 bg-accent text-bg font-mono font-bold text-xs flex items-center gap-2 rounded hover:brightness-110 transition-all shadow-lg"
-            >
-              <span>VIEW PROJECTS</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
-
-            <a
-              href={siteConfig.resumeUrl}
-              download
-              className="h-12 px-6 bg-bg-elevated border border-accent text-accent font-mono font-bold text-xs flex items-center gap-2 rounded hover:bg-accent/10 transition-all"
-            >
-              <span>DOWNLOAD RESUME &darr;</span>
-            </a>
-
-            <span className="text-xs font-mono text-text-faint">
-              or press <kbd className="px-1.5 py-0.5 bg-bg-elevated border border-border text-accent">⌘K</kbd> to navigate like a terminal
-            </span>
-          </div>
-        </div>
-      </section>
+    <div className="space-y-24 py-4">
+      {/* 00 // HERO SECTION */}
+      <HeroSection onOpenMMGame={openMMGame} onOpenPalette={openPalette} />
 
       {/* 01 // ABOUT SECTION ANCHOR */}
       <section id="about" className="pt-16 border-t border-border/50">
