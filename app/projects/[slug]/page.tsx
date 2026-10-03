@@ -6,7 +6,6 @@ import { CodeBlock } from "@/components/code-block";
 import { ProjectCardVisual } from "@/components/project-card-visual";
 import { MonteCarloLab } from "@/components/monte-carlo-lab";
 import { FraudReplay } from "@/components/fraud-replay";
-import { ThompsonSimulator } from "@/components/thompson-simulator";
 import {
   ArrowLeft,
   ExternalLink,
@@ -238,12 +237,6 @@ export default function ProjectTearsheetPage({ params }: { params: { slug: strin
         </section>
       )}
 
-      {/* Flagship Interactive Thompson Sampling for PRJ-004 */}
-      {project.id === "prj-004" && (
-        <section className="space-y-4">
-          <ThompsonSimulator />
-        </section>
-      )}
 
       {/* Real Sample Output for PRJ-002 */}
       {project.id === "prj-002" && (
