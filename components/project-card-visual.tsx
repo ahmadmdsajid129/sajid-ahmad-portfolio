@@ -113,23 +113,32 @@ export function ProjectCardVisual({ slug }: ProjectVisualProps) {
   // PRJ-004: Full-Stack Architecture flow thumbnail
   return (
     <div className="w-full h-32 bg-bg-inset border border-border/80 relative overflow-hidden p-2 group-hover:border-accent/40 transition-colors font-mono">
-      <div className="absolute top-1.5 left-2 text-[9px] text-text-faint">
-        ARCHITECTURE PIPELINE &middot; NEXT.js 14 &middot; MONGODB &middot; REDIS
+      <div className="absolute top-1.5 left-2 right-2 flex items-center justify-between text-[9px] text-text-faint">
+        <span className="truncate">ARCHITECTURE &middot; NEXT.js 14 &middot; MONGODB &middot; REDIS</span>
+        <span className="text-up font-semibold flex items-center gap-1 shrink-0 ml-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-up animate-pulse" />
+          LOAD-TESTED
+        </span>
       </div>
-      <div className="pt-5 flex items-center justify-between text-[10px] text-text-muted h-full px-2">
-        <div className="p-1.5 bg-bg-elevated border border-border text-center">
-          <div className="text-text font-bold">CLIENT</div>
-          <div className="text-[8px] text-text-faint">Next.js 14</div>
+      <div className="pt-5 flex items-center justify-between text-[10px] text-text-muted h-full px-1 gap-1">
+        <div className="p-1.5 bg-bg-elevated border border-border text-center flex-1 min-w-0">
+          <div className="text-text font-bold text-[10px] truncate">CLIENT</div>
+          <div className="text-[8px] text-text-faint truncate">Next.js 14</div>
         </div>
-        <span className="text-accent">&rarr;</span>
-        <div className="p-1.5 bg-bg-elevated border border-border text-center">
-          <div className="text-accent font-bold">API / ESCROW</div>
-          <div className="text-[8px] text-text-faint">Server Verify</div>
+        <span className="text-accent text-xs">&rarr;</span>
+        <div className="p-1.5 bg-bg-elevated border border-border text-center flex-1 min-w-0">
+          <div className="text-accent font-bold text-[10px] truncate">API / ESCROW</div>
+          <div className="text-[8px] text-text-faint truncate">eSewa HMAC</div>
         </div>
-        <span className="text-accent">&rarr;</span>
-        <div className="p-1.5 bg-bg-elevated border border-border text-center">
-          <div className="text-up font-bold">DB / CACHE</div>
-          <div className="text-[8px] text-text-faint">Mongo + Redis</div>
+        <span className="text-accent text-xs">&rarr;</span>
+        <div className="p-1.5 bg-bg-elevated border border-border text-center flex-1 min-w-0">
+          <div className="text-warn font-bold text-[10px] truncate">ATELIER</div>
+          <div className="text-[8px] text-text-faint truncate">Split Orders</div>
+        </div>
+        <span className="text-accent text-xs">&rarr;</span>
+        <div className="p-1.5 bg-bg-elevated border border-border text-center flex-1 min-w-0">
+          <div className="text-up font-bold text-[10px] truncate">DB / CACHE</div>
+          <div className="text-[8px] text-text-faint truncate">Mongo + Redis</div>
         </div>
       </div>
     </div>

@@ -18,6 +18,7 @@ import {
   ChevronRight,
   TrendingDown,
   TrendingUp,
+  Sparkles,
 } from "lucide-react";
 import { Metadata } from "next";
 
@@ -192,6 +193,27 @@ export default function ProjectTearsheetPage({ params }: { params: { slug: strin
           </div>
         </div>
       </section>
+
+      {/* 2b. Core Capabilities & Key Highlights */}
+      {project.highlights && project.highlights.length > 0 && (
+        <section className="terminal-panel p-6 bg-bg-elevated border border-border space-y-3 font-mono text-xs">
+          <div className="flex items-center gap-2 text-accent font-bold text-sm">
+            <Sparkles className="w-4 h-4" />
+            <span>CORE CAPABILITIES &amp; HIGHLIGHTS</span>
+          </div>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-text">
+            {project.highlights.map((highlight, idx) => (
+              <li
+                key={idx}
+                className="flex items-start gap-2 p-2.5 bg-bg-inset border border-border/80 rounded"
+              >
+                <span className="text-accent font-bold mt-0.5 select-none">&rsaquo;</span>
+                <span className="leading-relaxed">{highlight}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* Visual Chart / Demonstration Section */}
       <section className="space-y-4">

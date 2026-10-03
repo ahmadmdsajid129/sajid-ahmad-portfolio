@@ -24,6 +24,7 @@ export function ProjectsSection() {
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.oneLiner.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.stack.some((tech) => tech.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      project.highlights?.some((h) => h.toLowerCase().includes(searchQuery.toLowerCase())) ||
       project.code.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesFilter && matchesSearch;
   });
@@ -43,30 +44,30 @@ export function ProjectsSection() {
         </div>
 
         {/* Filter Controls & Search */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 font-mono text-xs">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 font-mono text-xs w-full lg:w-auto">
           {/* Tag search input */}
-          <div className="relative">
-            <Search className="w-3.5 h-3.5 text-text-faint absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <div className="relative w-full sm:w-72 lg:w-80">
+            <Search className="w-3.5 h-3.5 text-text-faint absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search stack or tags..."
-              className="pl-8 pr-3 py-1.5 bg-bg-elevated border border-border text-text placeholder:text-text-faint focus:border-accent focus:outline-none rounded w-full sm:w-48 text-xs"
+              placeholder="Search stack, tags, or code..."
+              className="pl-9 pr-3 h-10 bg-bg-elevated border border-border text-text placeholder:text-text-faint focus:border-accent focus:outline-none rounded w-full text-xs font-mono transition-colors"
             />
           </div>
 
           {/* Filter Tabs */}
-          <div className="flex items-center bg-bg-elevated border border-border p-0.5 rounded">
+          <div className="grid grid-cols-4 items-center bg-bg-elevated border border-border p-1 rounded w-full sm:w-72 lg:w-80 h-10">
             {(["ALL", "Quant", "ML", "Full-Stack"] as const).map((tab) => {
               const isActive = activeFilter === tab;
               return (
                 <button
                   key={tab}
                   onClick={() => setActiveFilter(tab)}
-                  className={`px-3 py-1 font-semibold uppercase text-[11px] transition-all rounded-sm ${
+                  className={`h-full flex items-center justify-center font-semibold uppercase text-[10.5px] sm:text-[11px] whitespace-nowrap transition-all rounded-sm px-1 ${
                     isActive
-                      ? "bg-accent text-bg"
+                      ? "bg-accent text-bg shadow-sm"
                       : "text-text-muted hover:text-text hover:bg-bg-inset"
                   }`}
                 >
@@ -136,13 +137,17 @@ export function ProjectsSection() {
                   {project.metrics.map((m, idx) => (
                     <div
                       key={idx}
-                      className="p-2 bg-bg-inset border border-border rounded flex flex-col justify-between min-w-0 overflow-hidden"
+                      className="p-2 bg-bg-inset border border-border rounded flex flex-col justify-between min-w-0 overflow-hidden min-h-[54px]"
                     >
                       <span className="text-[10px] text-text-faint uppercase truncate block">{m.label}</span>
                       <span
                         title={m.value}
-                        className={`font-bold mt-0.5 truncate block ${
-                          m.value.length > 12 ? "text-[11px] sm:text-xs" : "text-sm"
+                        className={`font-bold mt-0.5 leading-snug break-words ${
+                          m.value.length > 15
+                            ? "text-[10px] sm:text-[10.5px]"
+                            : m.value.length > 10
+                            ? "text-[11px] sm:text-xs"
+                            : "text-sm"
                         } ${m.highlight ? "text-accent" : "text-text"}`}
                       >
                         {m.value} {m.change && <span className="text-xs">{m.change}</span>}
@@ -172,6 +177,23 @@ export function ProjectsSection() {
                     ))}
                   </div>
                 </div>
+
+                {/* Key Highlights */}
+                {project.highlights && project.highlights.length > 0 && (
+                  <div className="pt-2 border-t border-border/40 font-mono text-[11px] space-y-1.5">
+                    <div className="text-[10px] text-accent uppercase font-bold tracking-wider">
+                      KEY HIGHLIGHTS
+                    </div>
+                    <ul className="space-y-1 text-text-muted">
+                      {project.highlights.map((highlight, hIdx) => (
+                        <li key={hIdx} className="flex items-start gap-1.5 leading-snug">
+                          <span className="text-accent font-bold mt-0.5 select-none">&rsaquo;</span>
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
                 {/* Tech Chips */}
                 <div className="flex flex-wrap gap-1.5 pt-1">

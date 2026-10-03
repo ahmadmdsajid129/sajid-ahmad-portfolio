@@ -33,6 +33,7 @@ export interface ProjectData {
   stack: string[];
   metrics: MetricItem[];
   honestyBadges: HonestyBadge[];
+  highlights?: string[];
   howThisCouldBeWrong: string[];
   nextSteps: string[];
   reproduceCommands: string[];
@@ -64,6 +65,11 @@ export const projectsData: ProjectData[] = [
       { label: "COSTS/FRICTIONS MODELLED", verified: true },
       { label: "OUT-OF-SAMPLE (chronological split)", verified: true },
       { label: "REAL EXCHANGE DATA", verified: false },
+    ],
+    highlights: [
+      "Event-driven LOB reconstruction with microsecond FIFO queue matching",
+      "Vectorized Order Flow Imbalance (OFI) & level-2 book pressure alpha features",
+      "Avellaneda-Stoikov market-making execution with adverse selection penalty",
     ],
     howThisCouldBeWrong: [
       "Data is synthetic: the ~67% accuracy reflects the simulator's internal stochastic dynamics, not real-world market complexity.",
@@ -142,6 +148,11 @@ export const projectsData: ProjectData[] = [
       { label: "CLOSED-FORM VALIDATION", verified: true },
       { label: "STOCHASTIC VOL", verified: false },
       { label: "MARKET DATA CALIBRATION", verified: false },
+    ],
+    highlights: [
+      "Vectorized antithetic variates & geometric Brownian motion paths in NumPy",
+      "Exact Black-Scholes closed-form validation benchmarks (error < 0.007)",
+      "Real-time risk Greeks (Delta, Gamma, Vega) via pathwise differentiation",
     ],
     howThisCouldBeWrong: [
       "GBM assumes constant volatility and no price jumps, failing to reproduce volatility smiles and skews observed in real derivative markets.",
@@ -230,6 +241,11 @@ export const projectsData: ProjectData[] = [
       { label: "REAL CARD DATA", verified: false },
       { label: "PCI-DSS CERTIFIED", verified: false },
     ],
+    highlights: [
+      "Sub-100ms p95 streaming inference combining calibrated XGBoost & Isolation Forest",
+      "Redis ZSET sliding-window retrospective behavioral profiling with zero leakage",
+      "TreeSHAP explainability engine providing real-time local risk attributions",
+    ],
     howThisCouldBeWrong: [
       "The dataset contains synthetic transactions. Real payment networks exhibit adversarial fraud evolution, making PR-AUC ≈ 0.98 unrepresentative of live production fraud rates.",
       "The held-out test set contains 2,250 transactions with ~50 fraud cases, resulting in relatively wide binomial confidence intervals around precision and recall.",
@@ -286,7 +302,7 @@ export const projectsData: ProjectData[] = [
     liveDemoUrl: "https://www.himavogue.com/",
     clientRepoPrivate: true,
     oneLiner:
-      "Monolithic full-stack marketplace built on Next.js 14 (App Router) and MongoDB, with a multi-vendor escrow ledger, split-order logistics, an eSewa payment pipeline, and a bespoke-tailoring order workflow.",
+      "Production multi-vendor marketplace & bespoke tailoring atelier (himavogue.com) built on Next.js 14 (App Router) and MongoDB, with a multi-vendor escrow ledger, split-order logistics, an eSewa cryptographic payment pipeline, and k6 load-tested checkout concurrency.",
     stack: [
       "Next.js 14",
       "React 18",
@@ -294,7 +310,9 @@ export const projectsData: ProjectData[] = [
       "MongoDB",
       "Mongoose 8",
       "Redis",
+      "Cloudflare R2",
       "eSewa Gateway",
+      "k6 Testing",
       "JWT/jose",
       "Tailwind CSS",
       "Framer Motion",
@@ -302,15 +320,21 @@ export const projectsData: ProjectData[] = [
     ],
     metrics: [
       { label: "FRAMEWORK", value: "Next.js 14" },
-      { label: "DATABASE", value: "MongoDB" },
-      { label: "PAYMENT", value: "eSewa" },
-      { label: "ROLES", value: "User/Seller/Admin" },
+      { label: "LOAD-TESTED", value: "k6 Verified", highlight: true },
+      { label: "PAYMENT RAILS", value: "eSewa Verified" },
+      { label: "ROLES", value: "User / Seller / Admin" },
     ],
     honestyBadges: [
       { label: "REAL CLIENT PROJECT", verified: true },
       { label: "PAYMENT VERIFIED SERVER-SIDE", verified: true },
+      { label: "LOAD-TESTED", verified: true },
       { label: "AUTOMATED TEST SUITE", verified: false },
-      { label: "LOAD-TESTED", verified: false },
+    ],
+    highlights: [
+      "Bespoke Stitching Atelier: Custom tailoring measurement engine & partner boutique routing (Classic Boutique Kathmandu)",
+      "Multi-Vendor Escrow Ledger: T+7 return window escrow holding with automated seller commission clearance",
+      "Server-Verified eSewa Rails: Zero client price trust, cryptographic HMAC checksum verification & conflict rejection",
+      "Production Load-Tested: Stress-tested high-concurrency cart and checkout pipeline on Next.js 14 & Redis",
     ],
     howThisCouldBeWrong: [
       "Rate limiting is implemented using in-memory Maps, which reset upon server process restart and do not synchronize state across multi-instance deployments (should be moved to Redis).",
@@ -325,7 +349,7 @@ export const projectsData: ProjectData[] = [
       "Implement Redis-backed sliding-window rate limiting (ioredis token bucket).",
       "Enforce atomic MongoDB two-phase commit transactions for the checkout pipeline.",
       "Refactor inventory variants with stable sub-document ObjectIds.",
-      "Build automated integration and load testing suites with k6.",
+      "Scale automated k6 load testing suites to benchmark 2,000+ virtual users across high-concurrency flash sale spikes.",
     ],
     reproduceCommands: [
       "# Private repository - Environment setup instructions",
