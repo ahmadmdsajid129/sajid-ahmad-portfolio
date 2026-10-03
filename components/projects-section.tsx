@@ -136,13 +136,14 @@ export function ProjectsSection() {
                   {project.metrics.map((m, idx) => (
                     <div
                       key={idx}
-                      className="p-2 bg-bg-inset border border-border rounded flex flex-col justify-between"
+                      className="p-2 bg-bg-inset border border-border rounded flex flex-col justify-between min-w-0 overflow-hidden"
                     >
-                      <span className="text-[10px] text-text-faint uppercase">{m.label}</span>
+                      <span className="text-[10px] text-text-faint uppercase truncate block">{m.label}</span>
                       <span
-                        className={`text-sm font-bold mt-0.5 ${
-                          m.highlight ? "text-accent" : "text-text"
-                        }`}
+                        title={m.value}
+                        className={`font-bold mt-0.5 truncate block ${
+                          m.value.length > 12 ? "text-[11px] sm:text-xs" : "text-sm"
+                        } ${m.highlight ? "text-accent" : "text-text"}`}
                       >
                         {m.value} {m.change && <span className="text-xs">{m.change}</span>}
                       </span>
@@ -194,13 +195,13 @@ export function ProjectsSection() {
                   <span>TEARSHEET &rarr;</span>
                 </Link>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
                   {project.repoUrl && (
                     <a
                       href={project.repoUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-text-muted hover:text-text flex items-center gap-1 transition-colors"
+                      className="text-text-muted hover:text-text flex items-center gap-1 transition-colors px-1"
                     >
                       <span>CODE</span>
                       <ExternalLink className="w-3 h-3" />
@@ -209,7 +210,7 @@ export function ProjectsSection() {
 
                   {project.clientRepoPrivate && (
                     <span className="text-text-faint text-[10px] px-2 py-0.5 bg-bg-inset border border-border">
-                      CODE: PRIVATE (client work)
+                      CODE: PRIVATE
                     </span>
                   )}
 
@@ -218,9 +219,10 @@ export function ProjectsSection() {
                       href={project.liveDemoUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-accent hover:underline flex items-center gap-1 transition-colors"
+                      className="px-2.5 py-1 bg-up/10 border border-up/30 text-up hover:bg-up/20 rounded-sm flex items-center gap-1.5 transition-colors font-semibold"
                     >
-                      <span>CLIENT REPO</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-up animate-pulse" />
+                      <span>{project.id === "prj-004" ? "LIVE SITE" : "CLIENT REPO"}</span>
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   )}

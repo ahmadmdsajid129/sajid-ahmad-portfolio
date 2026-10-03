@@ -134,9 +134,10 @@ export default function ProjectTearsheetPage({ params }: { params: { slug: strin
                 href={project.liveDemoUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="px-3 py-1.5 bg-bg-elevated border border-border text-text hover:text-accent rounded flex items-center gap-1.5 transition-all"
+                className="px-3.5 py-1.5 bg-up text-bg font-bold rounded flex items-center gap-2 hover:brightness-110 active:scale-98 transition-all shadow-sm"
               >
-                <span>CLIENT REPO</span>
+                <span className="w-2 h-2 rounded-full bg-bg animate-pulse" />
+                <span>{project.id === "prj-004" ? "VISIT LIVE STORE (himavogue.com)" : "CLIENT REPO"}</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             )}

@@ -47,7 +47,7 @@ export const projectsData: ProjectData[] = [
     type: "Quant",
     title: "LOB Alpha Simulator & Market-Making Engine",
     dateRange: "2024 - 2025",
-    status: "COMPLETE // OOS EVALUATED",
+    status: "COMPLETE | OOS EVALUATED",
     featured: true,
     repoUrl: "https://github.com/ahmadmdsajid129/lob-alpha-simulator",
     oneLiner:
@@ -115,7 +115,7 @@ export const projectsData: ProjectData[] = [
     type: "Quant",
     title: "Exotic Options Pricing Engine + Web Client",
     dateRange: "2024",
-    status: "COMPLETE // CLIENT-SERVER",
+    status: "COMPLETE | CLIENT-SERVER",
     featured: true,
     repoUrl: "https://github.com/ahmadmdsajid129/exotic-options-pricer",
     liveDemoUrl: "https://github.com/ahmadmdsajid129/exotic-options-client",
@@ -196,7 +196,7 @@ export const projectsData: ProjectData[] = [
     type: "ML",
     title: "Real-Time Payment Fraud Detection & Risk Engine",
     dateRange: "2024",
-    status: "COMPLETE // 61/61 TESTS",
+    status: "COMPLETE | 61/61 TESTS",
     featured: true,
     repoUrl: "https://github.com/ahmadmdsajid129/real-time-payment-fraud-detection",
     oneLiner:
@@ -281,8 +281,9 @@ export const projectsData: ProjectData[] = [
     type: "Full-Stack",
     title: "HimaVogue: Multi-Vendor E-Commerce & Atelier",
     dateRange: "2024",
-    status: "COMPLETE // CLIENT WORK",
+    status: "COMPLETE | CLIENT WORK",
     featured: false,
+    liveDemoUrl: "https://www.himavogue.com/",
     clientRepoPrivate: true,
     oneLiner:
       "Monolithic full-stack marketplace built on Next.js 14 (App Router) and MongoDB, with a multi-vendor escrow ledger, split-order logistics, an eSewa payment pipeline, and a bespoke-tailoring order workflow.",
