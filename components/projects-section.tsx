@@ -32,49 +32,52 @@ export function ProjectsSection() {
   return (
     <section id="projects" className="pt-20 border-t border-border">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div className="mb-10 space-y-4">
         <div>
           <div className="section-label mb-2">02 | PROJECTS</div>
-          <h2 className="text-3xl md:text-5xl font-bold font-heading text-text tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading text-text tracking-tight whitespace-nowrap">
             RESEARCH &amp; BUILDS <span className="text-accent">| TEARSHEETS</span>
           </h2>
-          <p className="text-sm font-mono text-text-muted mt-2 max-w-2xl">
-            Vectorized Monte Carlo kernels, high-frequency limit order book dynamics, and streaming ML risk engines. Evaluated with strict out-of-sample discipline.
-          </p>
         </div>
 
-        {/* Filter Controls & Search */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 font-mono text-xs w-full lg:w-auto">
-          {/* Tag search input */}
-          <div className="relative w-full sm:w-72 lg:w-80">
-            <Search className="w-3.5 h-3.5 text-text-faint absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search stack, tags, or code..."
-              className="pl-9 pr-3 h-10 bg-bg-elevated border border-border text-text placeholder:text-text-faint focus:border-accent focus:outline-none rounded w-full text-xs font-mono transition-colors"
-            />
-          </div>
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pt-1">
+          <p className="text-sm font-mono text-text-muted max-w-2xl leading-relaxed">
+            Vectorized Monte Carlo kernels, high-frequency limit order book dynamics, and streaming ML risk engines. Evaluated with strict out-of-sample discipline.
+          </p>
 
-          {/* Filter Tabs */}
-          <div className="grid grid-cols-4 items-center bg-bg-elevated border border-border p-1 rounded w-full sm:w-72 lg:w-80 h-10">
-            {(["ALL", "Quant", "ML", "Full-Stack"] as const).map((tab) => {
-              const isActive = activeFilter === tab;
-              return (
-                <button
-                  key={tab}
-                  onClick={() => setActiveFilter(tab)}
-                  className={`h-full flex items-center justify-center font-semibold uppercase text-[10.5px] sm:text-[11px] whitespace-nowrap transition-all rounded-sm px-1 ${
-                    isActive
-                      ? "bg-accent text-bg shadow-sm"
-                      : "text-text-muted hover:text-text hover:bg-bg-inset"
-                  }`}
-                >
-                  {tab}
-                </button>
-              );
-            })}
+          {/* Filter Controls & Search */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 font-mono text-xs w-full lg:w-auto shrink-0">
+            {/* Tag search input */}
+            <div className="relative w-full sm:w-64 md:w-72">
+              <Search className="w-3.5 h-3.5 text-text-faint absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search stack, tags, or code..."
+                className="pl-9 pr-3 h-10 bg-bg-elevated border border-border text-text placeholder:text-text-faint focus:border-accent focus:outline-none rounded w-full text-xs font-mono transition-colors"
+              />
+            </div>
+
+            {/* Filter Tabs */}
+            <div className="grid grid-cols-4 items-center bg-bg-elevated border border-border p-1 rounded w-full sm:w-64 md:w-72 h-10">
+              {(["ALL", "Quant", "ML", "Full-Stack"] as const).map((tab) => {
+                const isActive = activeFilter === tab;
+                return (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveFilter(tab)}
+                    className={`h-full flex items-center justify-center font-semibold uppercase text-[10.5px] sm:text-[11px] whitespace-nowrap transition-all rounded-sm px-1 ${
+                      isActive
+                        ? "bg-accent text-bg shadow-sm"
+                        : "text-text-muted hover:text-text hover:bg-bg-inset"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
