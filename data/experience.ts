@@ -16,7 +16,7 @@ export const experienceData: ExperienceItem[] = [
     role: "Full-Stack Software Engineer (Freelance)",
     organization: "HimaVogue Multi-Vendor Marketplace",
     location: "Remote",
-    dateRange: "2024 - Present",
+    dateRange: "Aug 2025 - July 2026",
     type: "Contract",
     bullets: [
       "Architected and deployed a multi-vendor marketplace using Next.js 14 (App Router) and MongoDB, supporting user, vendor, and admin roles.",
@@ -45,7 +45,7 @@ export const experienceData: ExperienceItem[] = [
     role: "Quantitative Systems & Risk Researcher (Independent)",
     organization: "Open-Source Quantitative Research",
     location: "Remote",
-    dateRange: "2024 - 2025",
+    dateRange: "2024 - 2026",
     type: "Open Source",
     bullets: [
       "Engineered an event-driven limit order book simulator in Python featuring FIFO queue mechanics, Order Book Imbalance (OBI) tracking, and XGBoost alpha signals.",
