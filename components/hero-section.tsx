@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { siteConfig } from "@/data/site";
 import { OrderBookSimulator } from "./orderbook-simulator";
-import { ArrowRight, ArrowDown, ChevronDown, RefreshCw } from "lucide-react";
+import { ArrowRight, ArrowDown, ChevronDown } from "lucide-react";
 import { useToast } from "./toast-provider";
 import { SplitFlapBoard } from "./split-flap-ticker";
 import { sound } from "@/lib/sound";
@@ -48,15 +48,8 @@ function StatItem({
           : "hover:border-accent/80"
       }`}
     >
-      <div className="font-mono text-2xl lg:text-3xl font-bold text-text tabular-nums tracking-tight h-8 sm:h-9 flex items-center justify-between">
+      <div className="font-mono text-2xl lg:text-3xl font-bold text-text tabular-nums tracking-tight h-8 sm:h-9 flex items-center">
         <SplitFlapBoard value={value} />
-        {isClickable && (
-          <RefreshCw
-            className={`w-3.5 h-3.5 text-text-faint group-hover:text-accent transition-colors ${
-              isRefreshing ? "animate-spin text-accent" : "opacity-0 group-hover:opacity-100"
-            }`}
-          />
-        )}
       </div>
       <div className="font-mono text-[11px] font-semibold text-text-muted uppercase mt-1 flex items-center gap-1.5">
         <span>{label}</span>
@@ -67,12 +60,8 @@ function StatItem({
           />
         )}
       </div>
-      <div className="font-mono text-[10px] text-text-faint truncate group-hover:text-text-muted transition-colors">
-        {isClickable && !isRefreshing ? (
-          <span className="text-accent/80 group-hover:text-accent">Click to refresh live count</span>
-        ) : (
-          detail
-        )}
+      <div className="font-mono text-[10px] text-text-faint truncate">
+        {isRefreshing ? "Refreshing from GitHub..." : detail}
       </div>
     </div>
   );

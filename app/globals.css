@@ -41,6 +41,74 @@ html {
   --warn: #B26A00;
 }
 
+/* Authentic Solari Split-Flap Ticker Mechanical Reel Styles */
+.solari-flap-frame {
+  background-color: #080B10;
+  border: 1px solid #2A3444;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.solari-flap-top {
+  background: linear-gradient(to bottom, #1C222D 0%, #12161E 100%);
+  border-bottom: 1px solid #000000;
+  color: #FFFFFF;
+}
+
+.solari-flap-bottom {
+  background: linear-gradient(to bottom, #0E1218 0%, #161C26 100%);
+  color: #FFFFFF;
+}
+
+.solari-flap-seam {
+  background-color: #000000;
+}
+
+.solari-flap-hinge {
+  background-color: #3B4758;
+}
+
+.solari-flap-glare {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.solari-flap-shadow {
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+/* Light / Paper Mode Solari Flaps (Authentic Vintage Terminal Ivory Flaps) */
+[data-theme="paper"] .solari-flap-frame {
+  background-color: #E2DDD0;
+  border: 1px solid #B8AE9D;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="paper"] .solari-flap-top {
+  background: linear-gradient(to bottom, #F7F4EC 0%, #E8E3D6 100%);
+  border-bottom: 1px solid #C2B7A4;
+  color: #14181F;
+}
+
+[data-theme="paper"] .solari-flap-bottom {
+  background: linear-gradient(to bottom, #DED8CA 0%, #E6E1D4 100%);
+  color: #14181F;
+}
+
+[data-theme="paper"] .solari-flap-seam {
+  background-color: #A89D8B;
+}
+
+[data-theme="paper"] .solari-flap-hinge {
+  background-color: #948875;
+}
+
+[data-theme="paper"] .solari-flap-glare {
+  background-color: rgba(255, 255, 255, 0.65);
+}
+
+[data-theme="paper"] .solari-flap-shadow {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
 /* Base Body Styles */
 body {
   background-color: var(--bg);

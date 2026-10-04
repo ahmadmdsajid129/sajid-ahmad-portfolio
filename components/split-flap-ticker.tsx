@@ -68,12 +68,12 @@ export function SplitFlapChar({ char, delayIndex = 0 }: SplitFlapCharProps) {
       }}
     >
       {/* Physical Split-Flap Frame */}
-      <div className="relative w-full h-full bg-bg-inset border border-border rounded-[3px] shadow-[inset_0_1px_2px_rgba(0,0,0,0.15),0_1px_2px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col font-mono font-bold leading-none">
+      <div className="relative w-full h-full solari-flap-frame rounded-[3px] overflow-hidden flex flex-col font-mono font-bold leading-none">
         
         {/* Top Half */}
-        <div className="relative w-full h-1/2 overflow-hidden bg-bg-elevated border-b border-border-strong/60 flex items-end justify-center">
+        <div className="relative w-full h-1/2 overflow-hidden solari-flap-top flex items-end justify-center">
           <span
-            className="text-text tabular-nums"
+            className="tabular-nums"
             style={{
               transform: "translateY(50%)",
             }}
@@ -81,22 +81,22 @@ export function SplitFlapChar({ char, delayIndex = 0 }: SplitFlapCharProps) {
             {currentChar}
           </span>
           {/* Top highlight glare */}
-          <div className="absolute inset-x-0 top-0 h-[1px] bg-white/10 pointer-events-none" />
+          <div className="absolute inset-x-0 top-0 h-[1px] solari-flap-glare pointer-events-none" />
         </div>
 
         {/* Center Mechanical Split Seam & Hinge Notches */}
         <div className="relative w-full h-0 z-10">
-          <div className="absolute inset-x-0 -top-[0.5px] h-[1px] bg-border-strong/80 shadow-sm" />
+          <div className="absolute inset-x-0 -top-[0.5px] h-[1px] solari-flap-seam shadow-sm" />
           {/* Left hinge notch */}
-          <div className="absolute -left-[1px] -top-[1.5px] w-[2px] h-[3px] bg-border-strong rounded-r-sm" />
+          <div className="absolute -left-[1px] -top-[1.5px] w-[2px] h-[3px] solari-flap-hinge rounded-r-sm" />
           {/* Right hinge notch */}
-          <div className="absolute -right-[1px] -top-[1.5px] w-[2px] h-[3px] bg-border-strong rounded-l-sm" />
+          <div className="absolute -right-[1px] -top-[1.5px] w-[2px] h-[3px] solari-flap-hinge rounded-l-sm" />
         </div>
 
         {/* Bottom Half */}
-        <div className="relative w-full h-1/2 overflow-hidden bg-bg-inset flex items-start justify-center">
+        <div className="relative w-full h-1/2 overflow-hidden solari-flap-bottom flex items-start justify-center">
           <span
-            className="text-text tabular-nums"
+            className="tabular-nums"
             style={{
               transform: "translateY(-50%)",
             }}
@@ -104,7 +104,7 @@ export function SplitFlapChar({ char, delayIndex = 0 }: SplitFlapCharProps) {
             {currentChar}
           </span>
           {/* Bottom shadow */}
-          <div className="absolute inset-x-0 top-0 h-[2px] bg-black/10 pointer-events-none" />
+          <div className="absolute inset-x-0 top-0 h-[3px] solari-flap-shadow pointer-events-none" />
         </div>
 
         {/* 3D Flap Down Shadow Overlay when flipping */}
