@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/data/site";
 import { useTheme } from "./theme-provider";
 import { useToast } from "./toast-provider";
+import { sound } from "@/lib/sound";
 import { Sun, Moon, Terminal as TerminalIcon, Menu, X, ArrowDown } from "lucide-react";
 
 interface NavItem {
@@ -79,6 +80,7 @@ export function Navbar({ onOpenPalette }: NavbarProps) {
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    sound?.playSectionTick();
     if (pathname === "/") {
       e.preventDefault();
       const el = document.getElementById(id);

@@ -28,6 +28,7 @@ export function HelpModal({ isOpen, onClose }: HelpModalProps) {
     { key: "⌘K / /", desc: "Open Command Palette" },
     { key: "T", desc: "Toggle Color Theme (Dark / Paper)" },
     { key: "P", desc: "Toggle Phosphor CRT Mode (Easter Egg)" },
+    { key: "M", desc: "Toggle Mechanical Audio Click Feedback" },
     { key: "?", desc: "Open this Shortcut Manual" },
     { key: "Esc", desc: "Close any modal / active overlay" },
   ];

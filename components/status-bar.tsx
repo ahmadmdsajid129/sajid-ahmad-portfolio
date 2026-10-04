@@ -1,11 +1,34 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { sound } from "@/lib/sound";
+import { Volume2, VolumeX } from "lucide-react";
 
 export function StatusBar() {
   const [sectionCode, setSectionCode] = useState("00 | OVERVIEW");
   const [utcTime, setUtcTime] = useState("");
   const [istTime, setIstTime] = useState("");
+  const [isMuted, setIsMuted] = useState(false);
+  const lastSectionRef = useRef<string>("");
+  const isInitialRef = useRef<boolean>(true);
+
+  // Sync mute state
+  useEffect(() => {
+    if (sound) {
+      setIsMuted(sound.isMuted());
+    }
+    const handleAudioToggle = (e: Event) => {
+      const custom = e as CustomEvent<{ muted: boolean }>;
+      setIsMuted(custom.detail?.muted ?? sound?.isMuted() ?? false);
+    };
+    window.addEventListener("portfolio-audio-toggled", handleAudioToggle);
+    return () => window.removeEventListener("portfolio-audio-toggled", handleAudioToggle);
+  }, []);
+
+  const toggleSound = () => {
+    const next = sound?.toggleMute();
+    setIsMuted(!!next);
+  };
 
   // Live clocks for UTC and IST
   useEffect(() => {
@@ -36,7 +59,7 @@ export function StatusBar() {
     return () => clearInterval(interval);
   }, []);
 
-  // Track active section for status bar display
+  // Track active section for status bar display and mechanical section scroll tick
   useEffect(() => {
     const sectionMap: Record<string, string> = {
       hero: "00 | HERO",
@@ -51,14 +74,23 @@ export function StatusBar() {
       const ids = Object.keys(sectionMap);
       const scrollPos = window.scrollY + 250;
 
+      let currentId = "hero";
       for (let i = ids.length - 1; i >= 0; i--) {
         const el = document.getElementById(ids[i]);
         if (el && el.offsetTop <= scrollPos) {
-          setSectionCode(sectionMap[ids[i]]);
-          return;
+          currentId = ids[i];
+          break;
         }
       }
-      setSectionCode("00 | OVERVIEW");
+
+      if (lastSectionRef.current !== currentId) {
+        if (!isInitialRef.current) {
+          sound?.playSectionTick();
+        }
+        lastSectionRef.current = currentId;
+        setSectionCode(sectionMap[currentId] || "00 | OVERVIEW");
+      }
+      isInitialRef.current = false;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -89,8 +121,21 @@ export function StatusBar() {
         <span>for commands</span>
       </div>
 
-      {/* Right: Clocks + Availability status */}
-      <div className="flex items-center gap-4">
+      {/* Right: Sound Toggle + Clocks + Availability status */}
+      <div className="flex items-center gap-3">
+        <button
+          onClick={toggleSound}
+          title={isMuted ? "Mechanical audio muted (click to enable)" : "Mechanical audio enabled (click to mute)"}
+          className="flex items-center gap-1 px-1.5 py-0.5 rounded border border-border hover:border-accent text-text-muted hover:text-accent transition-colors"
+        >
+          {isMuted ? (
+            <VolumeX className="w-3 h-3 text-text-faint" />
+          ) : (
+            <Volume2 className="w-3 h-3 text-accent" />
+          )}
+          <span className="text-[10px] font-bold">{isMuted ? "SND: OFF" : "SND: ON"}</span>
+        </button>
+
         <div className="flex items-center gap-2 tabular-nums text-text-muted">
           <span>{utcTime}</span>
           <span className="text-border-strong">|</span>

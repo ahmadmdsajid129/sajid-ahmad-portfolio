@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { siteConfig } from "@/data/site";
 import { useTheme } from "./theme-provider";
 import { useToast } from "./toast-provider";
+import { sound } from "@/lib/sound";
 import { Search, CornerDownLeft, Sparkles, Terminal } from "lucide-react";
 
 export interface CommandItem {
@@ -181,6 +182,16 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
       },
     },
     {
+      code: "SOUND",
+      name: "Toggle Mechanical Sound",
+      category: "SYSTEM",
+      description: "Toggle tactile audio click feedback on/off",
+      action: () => {
+        const isMuted = sound?.toggleMute();
+        addToast(isMuted ? "Mechanical audio MUTED" : "Mechanical audio ENABLED", "info", "SND");
+      },
+    },
+    {
       code: "HELP",
       name: "Shortcut Guide",
       category: "SYSTEM",
@@ -273,9 +284,11 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
         onClose();
       } else if (e.key === "ArrowDown") {
         e.preventDefault();
+        sound?.playMenuTick();
         setSelectedIndex((prev) => (prev + 1) % (filtered.length || 1));
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
+        sound?.playMenuTick();
         setSelectedIndex((prev) => (prev - 1 + filtered.length) % (filtered.length || 1));
       } else if (e.key === "Enter") {
         e.preventDefault();
@@ -339,7 +352,12 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
               return (
                 <div
                   key={cmd.code}
-                  onMouseEnter={() => setSelectedIndex(index)}
+                  onMouseEnter={() => {
+                    if (selectedIndex !== index) {
+                      sound?.playMenuTick();
+                      setSelectedIndex(index);
+                    }
+                  }}
                   onClick={() => {
                     cmd.action();
                     onClose();

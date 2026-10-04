@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTheme } from "./theme-provider";
 import { useToast } from "./toast-provider";
+import { sound } from "@/lib/sound";
 
 interface KeyboardShortcutsProps {
   onOpenPalette: () => void;
@@ -65,11 +66,20 @@ export function KeyboardShortcuts({ onOpenPalette, onOpenHelp }: KeyboardShortcu
         return;
       }
 
+      // Audio mute toggle (M)
+      if (e.key.toLowerCase() === "m" && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        const isMuted = sound?.toggleMute();
+        addToast(isMuted ? "Mechanical audio MUTED [M]" : "Mechanical audio ENABLED [M]", "info", "SND");
+        return;
+      }
+
       // Number keys 1-6 to jump to sections
       if (/^[1-6]$/.test(e.key)) {
         const index = parseInt(e.key, 10) - 1;
         const targetId = sectionIds[index];
         if (targetId) {
+          sound?.playSectionTick();
           const el = document.getElementById(targetId);
           if (el) {
             e.preventDefault();
@@ -107,6 +117,7 @@ export function KeyboardShortcuts({ onOpenPalette, onOpenHelp }: KeyboardShortcu
         const targetEl = document.getElementById(sectionIds[nextIndex]);
         if (targetEl) {
           e.preventDefault();
+          sound?.playSectionTick();
           targetEl.scrollIntoView({ behavior: "smooth" });
         }
       }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/site";
 import { useToast } from "./toast-provider";
+import { sound } from "@/lib/sound";
 import { ArrowUp, Terminal, Github, Linkedin, Mail, FileText, Rss } from "lucide-react";
 
 export function Footer() {
@@ -16,6 +17,7 @@ export function Footer() {
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    sound?.playSectionTick();
     if (pathname === "/") {
       e.preventDefault();
       const el = document.getElementById(id);
