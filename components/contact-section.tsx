@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { siteConfig } from "@/data/site";
 import { useToast } from "./toast-provider";
+import { sound } from "@/lib/sound";
 import {
   Mail,
   Phone,
@@ -15,6 +16,7 @@ import {
   Clock,
   MapPin,
   Shield,
+  AlertCircle,
 } from "lucide-react";
 
 export function ContactSection() {
@@ -24,6 +26,7 @@ export function ContactSection() {
   const [message, setMessage] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
 
@@ -47,7 +50,7 @@ export function ContactSection() {
     addToast("Resume downloading...", "info", "CV");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (honeypot) return; // bot detected
 
@@ -58,20 +61,41 @@ export function ContactSection() {
 
     setIsSubmitting(true);
 
-    // Fallback directly to mailto
-    const mailtoUrl = `mailto:${cleanEmail}?subject=Quant Inquiry from ${encodeURIComponent(
-      name
-    )}&body=${encodeURIComponent(message + "\n\nFrom: " + email)}`;
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          message: message.trim(),
+          honeypot,
+        }),
+      });
 
-    window.location.href = mailtoUrl;
+      const data = await res.json().catch(() => ({}));
 
-    setTimeout(() => {
+      if (res.ok && data.ok) {
+        sound?.playSectionTick();
+        setSubmitted(true);
+        setName("");
+        setEmail("");
+        setMessage("");
+        addToast("Transmission dispatched to ahmadmdsajid129@gmail.com", "success", "SENT");
+      } else {
+        throw new Error(data.error || "Relay rejected transmission");
+      }
+    } catch {
+      // Fallback directly to mailto
+      const mailtoUrl = `mailto:${cleanEmail}?subject=Quant Inquiry from ${encodeURIComponent(
+        name
+      )}&body=${encodeURIComponent(message + "\n\nFrom: " + email)}`;
+
+      window.location.href = mailtoUrl;
+      addToast("Relay offline - opened local email client", "info", "MAIL");
+    } finally {
       setIsSubmitting(false);
-      setName("");
-      setEmail("");
-      setMessage("");
-      addToast("Message dispatched to email client", "success", "SENT");
-    }, 1000);
+    }
   };
 
   return (
@@ -260,6 +284,18 @@ export function ContactSection() {
                 className="w-full p-2.5 bg-bg-inset border border-border text-text font-mono text-xs rounded focus:outline-none focus:border-accent"
               />
             </div>
+
+            {submitted && (
+              <div className="p-3 bg-bg-inset border border-accent/60 rounded text-[11px] text-accent flex items-start gap-2.5">
+                <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                <div className="space-y-1">
+                  <div className="font-bold uppercase tracking-wider">&gt; TRANSMISSION DELIVERED</div>
+                  <div className="text-text-muted leading-relaxed">
+                    Message routed directly to <span className="text-text font-semibold">ahmadmdsajid129@gmail.com</span>. Standard Response SLA &lt; 24h.
+                  </div>
+                </div>
+              </div>
+            )}
 
             <button
               type="submit"
