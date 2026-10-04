@@ -4,31 +4,75 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { siteConfig } from "@/data/site";
 import { OrderBookSimulator } from "./orderbook-simulator";
-import { ArrowRight, ArrowDown, ChevronDown } from "lucide-react";
+import { ArrowRight, ArrowDown, ChevronDown, RefreshCw } from "lucide-react";
 import { useToast } from "./toast-provider";
 import { SplitFlapBoard } from "./split-flap-ticker";
+import { sound } from "@/lib/sound";
 
 interface StatItemProps {
   value: string;
   label: string;
   detail: string;
   isLive?: boolean;
+  onClick?: () => void;
+  isRefreshing?: boolean;
+  clickableHint?: string;
 }
 
-function StatItem({ value, label, detail, isLive }: StatItemProps) {
+function StatItem({
+  value,
+  label,
+  detail,
+  isLive,
+  onClick,
+  isRefreshing,
+  clickableHint,
+}: StatItemProps) {
+  const isClickable = Boolean(onClick);
+
   return (
-    <div className="terminal-panel p-3 border-t-2 border-t-accent bg-bg-elevated/70 group hover:border-accent/80 transition-colors h-full">
-      <div className="font-mono text-2xl lg:text-3xl font-bold text-text tabular-nums tracking-tight h-8 sm:h-9 flex items-center">
+    <div
+      role={isClickable ? "button" : undefined}
+      tabIndex={isClickable ? 0 : undefined}
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (isClickable && (e.key === "Enter" || e.key === " ")) {
+          e.preventDefault();
+          onClick?.();
+        }
+      }}
+      title={clickableHint || detail}
+      className={`terminal-panel p-3 border-t-2 border-t-accent bg-bg-elevated/70 group transition-all h-full select-none ${
+        isClickable
+          ? "cursor-pointer hover:border-accent hover:bg-bg-elevated active:scale-[0.98] focus:outline-none focus:ring-1 focus:ring-accent"
+          : "hover:border-accent/80"
+      }`}
+    >
+      <div className="font-mono text-2xl lg:text-3xl font-bold text-text tabular-nums tracking-tight h-8 sm:h-9 flex items-center justify-between">
         <SplitFlapBoard value={value} />
+        {isClickable && (
+          <RefreshCw
+            className={`w-3.5 h-3.5 text-text-faint group-hover:text-accent transition-colors ${
+              isRefreshing ? "animate-spin text-accent" : "opacity-0 group-hover:opacity-100"
+            }`}
+          />
+        )}
       </div>
       <div className="font-mono text-[11px] font-semibold text-text-muted uppercase mt-1 flex items-center gap-1.5">
         <span>{label}</span>
         {isLive && (
-          <span className="w-1.5 h-1.5 rounded-full bg-up animate-pulse" title="Live verified from GitHub (public + private contributions)" />
+          <span
+            className="w-1.5 h-1.5 rounded-full bg-up animate-pulse"
+            title="Live verified from GitHub (public + private contributions)"
+          />
         )}
       </div>
-      <div className="font-mono text-[10px] text-text-faint truncate">
-        {detail}
+      <div className="font-mono text-[10px] text-text-faint truncate group-hover:text-text-muted transition-colors">
+        {isClickable && !isRefreshing ? (
+          <span className="text-accent/80 group-hover:text-accent">Click to refresh live count</span>
+        ) : (
+          detail
+        )}
       </div>
     </div>
   );
@@ -43,21 +87,43 @@ export function HeroSection({ onOpenMMGame, onOpenPalette }: HeroSectionProps) {
   const { addToast } = useToast();
   const [commitCount, setCommitCount] = useState<string>("1,286");
   const [isLive, setIsLive] = useState<boolean>(true);
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+
+  const fetchCommits = async (force: boolean = false) => {
+    if (isRefreshing) return;
+    if (force) {
+      setIsRefreshing(true);
+      sound?.playFlapTick(1.2);
+      addToast("Connecting to GitHub contributions API...", "info", "GIT");
+    }
+
+    try {
+      const url = force
+        ? `/api/github-commits?refresh=true&t=${Date.now()}`
+        : "/api/github-commits";
+      const res = await fetch(url);
+      const data = await res.json();
+      if (data && data.commits) {
+        if (force) {
+          sound?.playSectionTick();
+          addToast(`Live commits updated: ${data.commits}`, "success", "GIT");
+        }
+        setCommitCount(String(data.commits));
+        setIsLive(data.source === "github-api");
+      }
+    } catch {
+      if (force) {
+        addToast("Unable to refresh GitHub API right now", "warn", "GIT");
+      }
+    } finally {
+      if (force) {
+        setIsRefreshing(false);
+      }
+    }
+  };
 
   useEffect(() => {
-    let isMounted = true;
-    fetch("/api/github-commits")
-      .then((res) => res.json())
-      .then((data) => {
-        if (isMounted && data.commits) {
-          setCommitCount(String(data.commits));
-          setIsLive(data.source === "github-api");
-        }
-      })
-      .catch(() => {});
-    return () => {
-      isMounted = false;
-    };
+    fetchCommits(false);
   }, []);
 
   const handleResumeDownload = () => {
@@ -131,6 +197,9 @@ export function HeroSection({ onOpenMMGame, onOpenPalette }: HeroSectionProps) {
               label="Live Commits"
               detail="github.com/ahmadmdsajid129"
               isLive={isLive}
+              onClick={() => fetchCommits(true)}
+              isRefreshing={isRefreshing}
+              clickableHint="Click to query live GitHub contributions API"
             />
           </div>
 

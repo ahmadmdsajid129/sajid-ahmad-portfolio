@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 
 export const revalidate = 3600; // Cache for 1 hour
 
-export async function GET() {
+export async function GET(req: Request) {
   const username = "ahmadmdsajid129";
   const fallbackCommits = "1,286";
+  const { searchParams } = new URL(req.url);
+  const isForceRefresh = searchParams.get("refresh") === "true";
 
   try {
     // Fetch user contributions card which includes private repository contributions
@@ -13,8 +15,10 @@ export async function GET() {
       headers: {
         "User-Agent": "Mozilla/5.0 (compatible; PortfolioBot/1.0)",
         Accept: "text/html,application/xhtml+xml",
+        ...(isForceRefresh ? { "Cache-Control": "no-cache" } : {}),
       },
-      next: { revalidate: 3600 },
+      cache: isForceRefresh ? "no-store" : "default",
+      next: isForceRefresh ? { revalidate: 0 } : { revalidate: 3600 },
     });
 
     if (!res.ok) {
