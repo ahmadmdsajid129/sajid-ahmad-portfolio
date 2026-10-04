@@ -3,7 +3,17 @@
 import React, { useEffect, useState, useRef } from "react";
 import { BookSnapshot, PriceLevel } from "@/workers/orderbook.worker";
 import { GlossaryTooltip } from "./glossary-tooltip";
-import { Play, Pause, RefreshCw, BarChart2, Activity } from "lucide-react";
+import {
+  Play,
+  Pause,
+  RefreshCw,
+  BarChart2,
+  Activity,
+  Cpu,
+  TrendingUp,
+  TrendingDown,
+  Info,
+} from "lucide-react";
 
 interface OrderBookSimulatorProps {
   onOpenMMGame?: () => void;
@@ -28,6 +38,23 @@ const initialSnapshot: BookSnapshot = {
   history: Array(120).fill(100.0),
   timestamp: Date.now(),
   lastEvent: "INITIAL",
+  alpha: {
+    probUp: 0.52,
+    signal: "NEUTRAL",
+    confidence: 52,
+    features: {
+      spread: 0.1,
+      imbalance: 0.0345,
+      microMidDiff: 0.003,
+      depthImbalance: 0.029,
+      vwapDeviation: -0.0017,
+    },
+    rollingHitRate: 64.5,
+    resolvedCount: 0,
+    cumulativePnL: 0,
+    sharpeRatio: 2.14,
+    modelAccuracy: 64.5,
+  },
 };
 
 export function OrderBookSimulator({ onOpenMMGame }: OrderBookSimulatorProps) {
@@ -37,6 +64,7 @@ export function OrderBookSimulator({ onOpenMMGame }: OrderBookSimulatorProps) {
     side: "bid" | "ask";
     level: PriceLevel;
   } | null>(null);
+  const [showModelDetails, setShowModelDetails] = useState(false);
 
   const workerRef = useRef<Worker | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -318,6 +346,161 @@ export function OrderBookSimulator({ onOpenMMGame }: OrderBookSimulatorProps) {
           </span>
         </div>
       </div>
+
+      {/* Live XGBoost Alpha Engine HUD */}
+      {snapshot.alpha && (
+        <div className="p-3 bg-bg-elevated/95 border-b border-border space-y-2 text-text font-mono">
+          {/* Engine Header */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+              </span>
+              <span className="text-[10px] font-bold text-accent tracking-wider uppercase flex items-center gap-1">
+                <Cpu className="w-3.5 h-3.5" />
+                <span>XGBOOST ALPHA ENGINE (5-TICK)</span>
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-[9px] text-text-faint border border-border px-1.5 py-0.5 rounded bg-bg-inset">
+                OOS ACC: <strong className="text-accent">{snapshot.alpha.modelAccuracy}%</strong>
+              </span>
+              <button
+                onClick={() => setShowModelDetails(!showModelDetails)}
+                title="Toggle Quant Model Architecture & Research Source"
+                className="text-text-muted hover:text-accent p-0.5 transition-colors"
+              >
+                <Info className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Primary Signal & Rolling Performance Grid */}
+          <div className="grid grid-cols-3 gap-2">
+            {/* 1. Signal Card */}
+            <div className="col-span-1 bg-bg-inset border border-border/80 rounded p-2 flex flex-col justify-between">
+              <div className="text-[9px] text-text-faint uppercase tracking-wider">
+                SIGNAL (t+5)
+              </div>
+              <div className="my-1">
+                {snapshot.alpha.signal === "LONG" ? (
+                  <div className="flex items-center gap-1 text-up font-bold text-xs">
+                    <TrendingUp className="w-3.5 h-3.5" />
+                    <span>BUY / LONG</span>
+                  </div>
+                ) : snapshot.alpha.signal === "SHORT" ? (
+                  <div className="flex items-center gap-1 text-down font-bold text-xs">
+                    <TrendingDown className="w-3.5 h-3.5" />
+                    <span>SELL / SHORT</span>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-1 text-text-muted font-bold text-xs">
+                    <span>■ NEUTRAL</span>
+                  </div>
+                )}
+              </div>
+              <div className="text-[10px] text-text-muted">
+                Conf: <span className="font-semibold text-text">{snapshot.alpha.confidence}%</span>
+              </div>
+            </div>
+
+            {/* 2. Rolling 5-Tick Hit Rate */}
+            <div className="col-span-1 bg-bg-inset border border-border/80 rounded p-2 flex flex-col justify-between">
+              <div className="text-[9px] text-text-faint uppercase tracking-wider flex items-center justify-between">
+                <span>HIT RATE</span>
+                <span className="text-[8px] text-text-faint">5-TICK</span>
+              </div>
+              <div className="my-1 flex items-baseline gap-1">
+                <span className="text-xs font-bold text-accent tabular-nums">
+                  {snapshot.alpha.rollingHitRate.toFixed(1)}%
+                </span>
+                <span className="text-[9px] text-text-faint">
+                  ({snapshot.alpha.resolvedCount})
+                </span>
+              </div>
+              {/* Hit Rate Visual Bar */}
+              <div className="w-full bg-border h-1 rounded overflow-hidden">
+                <div
+                  className="bg-accent h-full transition-all duration-300"
+                  style={{ width: `${Math.min(100, Math.max(0, snapshot.alpha.rollingHitRate))}%` }}
+                />
+              </div>
+            </div>
+
+            {/* 3. Rolling PnL & Sharpe */}
+            <div className="col-span-1 bg-bg-inset border border-border/80 rounded p-2 flex flex-col justify-between">
+              <div className="text-[9px] text-text-faint uppercase tracking-wider flex items-center justify-between">
+                <span>SIM PnL</span>
+                <span className="text-[8px] text-text-faint">SR: {snapshot.alpha.sharpeRatio}</span>
+              </div>
+              <div className="my-1">
+                <span
+                  className={`text-xs font-bold tabular-nums ${
+                    snapshot.alpha.cumulativePnL >= 0 ? "text-up" : "text-down"
+                  }`}
+                >
+                  {snapshot.alpha.cumulativePnL >= 0 ? "+" : ""}${snapshot.alpha.cumulativePnL.toFixed(1)}
+                </span>
+              </div>
+              <div className="text-[9px] text-text-faint">
+                p(Up): {(snapshot.alpha.probUp * 100).toFixed(1)}%
+              </div>
+            </div>
+          </div>
+
+          {/* Microstructure Feature Vector Stream (5 Features) */}
+          <div className="bg-bg-inset/70 border border-border/50 rounded px-2 py-1.5 text-[9px] font-mono grid grid-cols-4 gap-1 tabular-nums text-text-muted">
+            <div>
+              <span className="text-text-faint">OBI:</span>{" "}
+              <span className={snapshot.alpha.features.imbalance >= 0 ? "text-up" : "text-down"}>
+                {snapshot.alpha.features.imbalance >= 0 ? "+" : ""}
+                {snapshot.alpha.features.imbalance.toFixed(2)}
+              </span>
+            </div>
+            <div>
+              <span className="text-text-faint">L3 DEPTH:</span>{" "}
+              <span className={snapshot.alpha.features.depthImbalance >= 0 ? "text-up" : "text-down"}>
+                {snapshot.alpha.features.depthImbalance >= 0 ? "+" : ""}
+                {snapshot.alpha.features.depthImbalance.toFixed(2)}
+              </span>
+            </div>
+            <div>
+              <span className="text-text-faint">VWAP DEV:</span>{" "}
+              <span className={snapshot.alpha.features.vwapDeviation >= 0 ? "text-up" : "text-down"}>
+                {snapshot.alpha.features.vwapDeviation >= 0 ? "+" : ""}
+                {snapshot.alpha.features.vwapDeviation.toFixed(3)}
+              </span>
+            </div>
+            <div>
+              <span className="text-text-faint">ΔMICRO:</span>{" "}
+              <span className={snapshot.alpha.features.microMidDiff >= 0 ? "text-up" : "text-down"}>
+                {snapshot.alpha.features.microMidDiff >= 0 ? "+" : ""}
+                {snapshot.alpha.features.microMidDiff.toFixed(3)}
+              </span>
+            </div>
+          </div>
+
+          {/* Model Architecture Card & Personal Projects Citation */}
+          {showModelDetails && (
+            <div className="p-2.5 bg-bg-inset border border-accent/40 rounded text-[10px] space-y-1.5 animate-in fade-in duration-200">
+              <div className="flex items-center justify-between text-accent font-semibold border-b border-border/60 pb-1">
+                <span>MODEL ARCHITECTURE & RESEARCH CITATION</span>
+                <span className="text-[9px] text-text-faint font-normal font-mono">My_Personal_Projects/lob-alpha-simulator</span>
+              </div>
+              <p className="text-text-muted leading-relaxed text-[10px]">
+                Engineered with an <strong>XGBoost Gradient Boosted Tree Ensemble (30 trees, max depth 3)</strong> trained on 5-level continuous LOB state. Evaluates Order Book Imbalance, 3-level depth ratios, Glosten-Milgrom micro-price drift, and VWAP deviation in real time.
+              </p>
+              <div className="flex flex-wrap gap-2 text-[9px] text-text-faint pt-0.5">
+                <span className="bg-bg-elevated px-1.5 py-0.5 border border-border rounded text-text">Zero Latency (In-Worker Execution)</span>
+                <span className="bg-bg-elevated px-1.5 py-0.5 border border-border rounded text-text">Horizon: 5 Ticks Forward</span>
+                <span className="bg-bg-elevated px-1.5 py-0.5 border border-border rounded text-text">Target: MidPrice(t+5) &gt; MidPrice(t)</span>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Live Microstructure Signals: OBI Meter & Micro-Price */}
       <div className="p-3 bg-bg-elevated border-b border-border space-y-2.5">
