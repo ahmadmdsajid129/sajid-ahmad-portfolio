@@ -94,15 +94,15 @@ export function AboutSection() {
 
               <div className="flex items-baseline justify-between border-b border-border/40 pb-1.5">
                 <span className="text-text-faint">FOCUS</span>
-                <span className="text-text text-right text-[11px]">
-                  Microstructure &middot; Derivatives &middot; ML Risk
+                <span className="text-text text-right text-[11px] font-semibold">
+                  Quant Researcher &middot; Quant Developer &middot; ML Risk
                 </span>
               </div>
 
               <div className="flex items-baseline justify-between border-b border-border/40 pb-1.5">
                 <span className="text-text-faint">LANGUAGES</span>
-                <span className="text-accent text-right">
-                  Python &middot; SQL &middot; TypeScript &middot; C++
+                <span className="text-accent font-semibold text-right">
+                  C++ &middot; JavaScript &middot; Python &middot; SQL
                 </span>
               </div>
 
