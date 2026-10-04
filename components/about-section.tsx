@@ -29,34 +29,6 @@ export function AboutSection() {
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
-  const researchSteps = [
-    {
-      num: "01",
-      step: "Hypothesis",
-      desc: "Formulate an economically grounded inefficiency or structural pricing anomaly before touching price series.",
-    },
-    {
-      num: "02",
-      step: "Data & Cleansing",
-      desc: "Strict chronological temporal alignment with zero look-ahead leakage and survivorship-bias filtering.",
-    },
-    {
-      num: "03",
-      step: "Execution Backtest",
-      desc: "Simulate real exchange frictions: spread crossing, taker fees, market-impact decay, and queue position.",
-    },
-    {
-      num: "04",
-      step: "Stress & Chaos",
-      desc: "Simulate liquidity dry-ups, toxic informed order flow bursts, parameter perturbation, and regime shifts.",
-    },
-    {
-      num: "05",
-      step: "Forward Paper Test",
-      desc: "Commit daily encrypted signal hashes to a public ledger prior to the market open for tamper-proof verification.",
-    },
-  ];
-
   const skillCategories = [
     "Quant & Math",
     "Machine Learning",
@@ -102,31 +74,6 @@ export function AboutSection() {
           {/* Amber-bordered pull quote */}
           <div className="terminal-panel p-4 bg-bg-elevated border-l-4 border-l-accent border-border italic text-text font-serif text-base sm:text-lg">
             &ldquo;If a backtest looks too good to be true, assume I made an error in the execution model.&rdquo;
-          </div>
-
-          {/* 5-Step "How I Research" Stepper */}
-          <div className="pt-4 space-y-3 font-mono">
-            <div className="text-xs font-bold text-accent uppercase tracking-wider">
-              HOW I RESEARCH | 5-STAGE PIPELINE
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 text-xs">
-              {researchSteps.map((s, idx) => (
-                <div
-                  key={s.num}
-                  className="p-3 bg-bg-inset border border-border rounded flex flex-col justify-between group hover:border-accent transition-colors"
-                >
-                  <div>
-                    <div className="text-[10px] text-text-faint">{s.num} |</div>
-                    <div className="font-bold text-text group-hover:text-accent mt-0.5">
-                      {s.step}
-                    </div>
-                  </div>
-                  <div className="text-[10px] text-text-faint mt-2 leading-relaxed">
-                    {s.desc}
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 
