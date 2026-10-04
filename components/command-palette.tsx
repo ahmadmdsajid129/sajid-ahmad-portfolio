@@ -93,13 +93,13 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
       },
     },
     {
-      code: "FAIL",
-      name: "The Anti-Portfolio",
+      code: "EXP",
+      name: "Experience & Timeline",
       category: "NAVIGATE",
-      description: "Strategies that failed and lessons learned",
+      description: "Engineering roles & open-source quantitative system builds",
       action: () => {
-        router.push("#research");
-        addToast("Navigated to 03 | THE ANTI-PORTFOLIO", "info", "FAIL");
+        router.push("#experience");
+        addToast("Navigated to 03 | EXPERIENCE", "info", "EXP");
       },
     },
     {

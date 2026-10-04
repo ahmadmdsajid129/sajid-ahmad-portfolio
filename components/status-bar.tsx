@@ -42,7 +42,7 @@ export function StatusBar() {
       hero: "00 | HERO",
       about: "01 | ABOUT",
       projects: "02 | PROJECTS",
-      research: "03 | RESEARCH",
+      experience: "03 | EXPERIENCE",
       education: "04 | EDUCATION",
       contact: "05 | CONTACT",
     };

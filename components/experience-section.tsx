@@ -17,7 +17,7 @@ export function ExperienceSection() {
   return (
     <section id="experience" className="pt-20 border-t border-border space-y-10">
       <div>
-        <div className="section-label mb-2">EXPERIENCE | TRADE BLOTTER</div>
+        <div className="section-label mb-2">03 | EXPERIENCE &amp; TIMELINE</div>
         <h2 className="text-3xl md:text-5xl font-bold font-heading text-text tracking-tight">
           CHRONOLOGICAL <span className="text-accent">| TIMELINE</span>
         </h2>

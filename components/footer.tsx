@@ -66,9 +66,9 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#research" className="hover:text-accent transition-colors flex items-center gap-2">
+                <Link href="#experience" className="hover:text-accent transition-colors flex items-center gap-2">
                   <span className="text-text-faint">03</span>
-                  <span>ANTI-PORTFOLIO &lt;FAIL&gt;</span>
+                  <span>EXPERIENCE &lt;TIMELINE&gt;</span>
                 </Link>
               </li>
               <li>

@@ -9,7 +9,7 @@ interface KeyboardShortcutsProps {
   onOpenHelp: () => void;
 }
 
-const sectionIds = ["hero", "about", "projects", "research", "education", "contact"];
+const sectionIds = ["hero", "about", "projects", "experience", "education", "contact"];
 
 export function KeyboardShortcuts({ onOpenPalette, onOpenHelp }: KeyboardShortcutsProps) {
   const { toggleTheme, togglePhosphor } = useTheme();

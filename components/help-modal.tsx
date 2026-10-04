@@ -23,7 +23,7 @@ export function HelpModal({ isOpen, onClose }: HelpModalProps) {
   if (!isOpen) return null;
 
   const shortcuts = [
-    { key: "1 - 6", desc: "Jump directly to section (About, Projects, Live, Research, Education, Contact)" },
+    { key: "1 - 6", desc: "Jump directly to section (Hero, About, Projects, Experience, Education, Contact)" },
     { key: "J / K", desc: "Next / Previous section" },
     { key: "⌘K / /", desc: "Open Command Palette" },
     { key: "T", desc: "Toggle Color Theme (Dark / Paper)" },
