@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { projectsData, ProjectType, ProjectData } from "@/data/projects";
 import { ProjectCardVisual } from "./project-card-visual";
-import { SplitFlapBoard } from "./split-flap-ticker";
 import { ArrowRight, ExternalLink, ShieldCheck, AlertCircle, Sparkles, Search } from "lucide-react";
 
 export function ProjectsSection() {
@@ -80,26 +79,6 @@ export function ProjectsSection() {
               })}
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Split-Flap Solari Board Counter Bar */}
-      <div className="flex items-center justify-between py-2.5 px-4 mb-6 bg-bg-elevated border border-border rounded font-mono text-xs shadow-sm">
-        <div className="flex items-center gap-2">
-          <span className="text-text-faint uppercase text-[10.5px]">FILTER ACTIVE:</span>
-          <span className="text-accent font-bold uppercase text-[11px]">{activeFilter}</span>
-          {searchQuery && (
-            <span className="text-text-faint text-[10.5px]">
-              &middot; query: &ldquo;{searchQuery}&rdquo;
-            </span>
-          )}
-        </div>
-        <div className="flex items-center gap-2 text-xs">
-          <span className="text-text-faint text-[10.5px]">MATCHED:</span>
-          <div className="text-sm">
-            <SplitFlapBoard value={String(filteredProjects.length).padStart(2, "0")} />
-          </div>
-          <span className="text-text-faint text-[10.5px]">/ 04 TEARSHEETS</span>
         </div>
       </div>
 
