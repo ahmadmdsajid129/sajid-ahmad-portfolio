@@ -2,15 +2,30 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/site";
 import { useToast } from "./toast-provider";
 import { ArrowUp, Terminal, Github, Linkedin, Mail, FileText, Rss } from "lucide-react";
 
 export function Footer() {
+  const pathname = usePathname();
   const { addToast } = useToast();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      const el = document.getElementById(id);
+      if (el) {
+        const yOffset = -70;
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+        window.history.pushState(null, "", `/#${id}`);
+      }
+    }
   };
 
   const handleVersionClick = () => {
@@ -28,13 +43,23 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Col 1: Wordmark & Back to Top */}
           <div className="space-y-4">
-            <div className="flex items-center text-sm font-bold text-text font-mono">
+            <Link
+              href="/"
+              onClick={(e) => {
+                if (pathname === "/") {
+                  e.preventDefault();
+                  scrollToTop();
+                  window.history.pushState(null, "", "/");
+                }
+              }}
+              className="flex items-center text-sm font-bold text-text font-mono hover:text-accent transition-colors"
+            >
               <span className="text-text-faint">&gt; </span>
               <span className="text-accent font-bold">SAJID</span>
               <span className="text-text-faint mx-2 text-xs font-normal">|</span>
               <span className="text-text">QUANT</span>
               <span className="inline-block w-2 h-3.5 bg-accent ml-1.5 animate-blink" />
-            </div>
+            </Link>
             <p className="text-text-muted leading-relaxed max-w-xs">
               Quantitative research, market microstructure models, and high-throughput risk engines.
             </p>
@@ -54,31 +79,51 @@ export function Footer() {
             </div>
             <ul className="space-y-2">
               <li>
-                <Link href="#about" className="hover:text-accent transition-colors flex items-center gap-2">
+                <Link
+                  href="/#about"
+                  onClick={(e) => handleNavClick(e, "about")}
+                  className="hover:text-accent transition-colors flex items-center gap-2"
+                >
                   <span className="text-text-faint">01</span>
                   <span>ABOUT &lt;DES&gt;</span>
                 </Link>
               </li>
               <li>
-                <Link href="#projects" className="hover:text-accent transition-colors flex items-center gap-2">
+                <Link
+                  href="/#projects"
+                  onClick={(e) => handleNavClick(e, "projects")}
+                  className="hover:text-accent transition-colors flex items-center gap-2"
+                >
                   <span className="text-text-faint">02</span>
                   <span>PROJECTS &lt;TEARSHEETS&gt;</span>
                 </Link>
               </li>
               <li>
-                <Link href="#experience" className="hover:text-accent transition-colors flex items-center gap-2">
+                <Link
+                  href="/#experience"
+                  onClick={(e) => handleNavClick(e, "experience")}
+                  className="hover:text-accent transition-colors flex items-center gap-2"
+                >
                   <span className="text-text-faint">03</span>
                   <span>EXPERIENCE &lt;TIMELINE&gt;</span>
                 </Link>
               </li>
               <li>
-                <Link href="#education" className="hover:text-accent transition-colors flex items-center gap-2">
+                <Link
+                  href="/#education"
+                  onClick={(e) => handleNavClick(e, "education")}
+                  className="hover:text-accent transition-colors flex items-center gap-2"
+                >
                   <span className="text-text-faint">04</span>
                   <span>EDUCATION &lt;TRANSCRIPT&gt;</span>
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="hover:text-accent transition-colors flex items-center gap-2">
+                <Link
+                  href="/#contact"
+                  onClick={(e) => handleNavClick(e, "contact")}
+                  className="hover:text-accent transition-colors flex items-center gap-2"
+                >
                   <span className="text-text-faint">05</span>
                   <span>CONTACT &lt;MSG&gt;</span>
                 </Link>

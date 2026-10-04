@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/data/site";
 import { useTheme } from "./theme-provider";
@@ -16,11 +17,11 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { id: "about", code: "01", label: "ABOUT", href: "#about" },
-  { id: "projects", code: "02", label: "PROJECTS", href: "#projects" },
-  { id: "experience", code: "03", label: "EXPERIENCE", href: "#experience" },
-  { id: "education", code: "04", label: "EDUCATION", href: "#education" },
-  { id: "contact", code: "05", label: "CONTACT", href: "#contact" },
+  { id: "about", code: "01", label: "ABOUT", href: "/#about" },
+  { id: "projects", code: "02", label: "PROJECTS", href: "/#projects" },
+  { id: "experience", code: "03", label: "EXPERIENCE", href: "/#experience" },
+  { id: "education", code: "04", label: "EDUCATION", href: "/#education" },
+  { id: "contact", code: "05", label: "CONTACT", href: "/#contact" },
 ];
 
 interface NavbarProps {
@@ -28,6 +29,7 @@ interface NavbarProps {
 }
 
 export function Navbar({ onOpenPalette }: NavbarProps) {
+  const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
   const { addToast } = useToast();
   const [activeSection, setActiveSection] = useState<string>("about");
@@ -76,14 +78,35 @@ export function Navbar({ onOpenPalette }: NavbarProps) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      const el = document.getElementById(id);
+      if (el) {
+        const yOffset = -70;
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+        window.history.pushState(null, "", `/#${id}`);
+        setActiveSection(id);
+      }
+    }
+  };
+
   return (
     <>
       <header className="sticky top-0 z-40 w-full h-14 bg-bg/85 backdrop-blur-md hairline-b transition-colors duration-200">
         <div className="max-w-[1200px] h-full mx-auto px-6 md:px-12 flex items-center justify-between">
           {/* Left: Wordmark > SAJID | QUANT█ */}
-          <button
-            onClick={scrollToTop}
-            aria-label="Scroll to top"
+          <Link
+            href="/"
+            onClick={(e) => {
+              if (pathname === "/") {
+                e.preventDefault();
+                scrollToTop();
+                window.history.pushState(null, "", "/");
+              }
+            }}
+            aria-label="Home"
             className="flex items-center font-mono text-sm tracking-wider font-bold text-text hover:text-accent transition-colors"
           >
             <span className="text-text-faint">&gt; </span>
@@ -91,16 +114,17 @@ export function Navbar({ onOpenPalette }: NavbarProps) {
             <span className="text-text-faint mx-2 text-xs font-normal">|</span>
             <span className="text-text">QUANT</span>
             <span className="inline-block w-2 h-3.5 bg-accent ml-1.5 animate-blink" />
-          </button>
+          </Link>
 
           {/* Center (Desktop Nav) */}
           <nav className="hidden lg:flex items-center gap-6 font-mono text-[13px]">
             {navItems.map((item) => {
-              const isActive = activeSection === item.id;
+              const isActive = pathname === "/" && activeSection === item.id;
               return (
                 <Link
                   key={item.id}
                   href={item.href}
+                  onClick={(e) => handleNavClick(e, item.id)}
                   className={`relative py-1 flex items-center gap-1.5 transition-colors ${
                     isActive ? "text-accent font-semibold" : "text-text-muted hover:text-text"
                   }`}
@@ -194,10 +218,13 @@ export function Navbar({ onOpenPalette }: NavbarProps) {
                 <Link
                   key={item.id}
                   href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    setMobileMenuOpen(false);
+                    handleNavClick(e, item.id);
+                  }}
                   className="flex items-center justify-between py-2 text-lg border-b border-border/40 text-text hover:text-accent transition-colors"
                 >
-                  <span className="text-sm text-text-faint">{item.code} //</span>
+                  <span className="text-sm text-text-faint">{item.code} |</span>
                   <span className="font-semibold tracking-wide">{item.label}</span>
                   <span className="text-xs text-accent">GO &rarr;</span>
                 </Link>

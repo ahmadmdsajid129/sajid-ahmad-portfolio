@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useTheme } from "./theme-provider";
 import { useToast } from "./toast-provider";
 
@@ -12,6 +13,7 @@ interface KeyboardShortcutsProps {
 const sectionIds = ["hero", "about", "projects", "experience", "education", "contact"];
 
 export function KeyboardShortcuts({ onOpenPalette, onOpenHelp }: KeyboardShortcutsProps) {
+  const router = useRouter();
   const { toggleTheme, togglePhosphor } = useTheme();
   const { addToast } = useToast();
 
@@ -71,8 +73,14 @@ export function KeyboardShortcuts({ onOpenPalette, onOpenHelp }: KeyboardShortcu
           const el = document.getElementById(targetId);
           if (el) {
             e.preventDefault();
-            el.scrollIntoView({ behavior: "smooth" });
+            const yOffset = -70;
+            const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: "smooth" });
+            window.history.pushState(null, "", `/#${targetId}`);
             addToast(`Jumped to section: ${targetId.toUpperCase()}`, "info", `SEC-${e.key}`);
+          } else {
+            router.push(`/#${targetId}`);
+            addToast(`Navigating to section: ${targetId.toUpperCase()}`, "info", `SEC-${e.key}`);
           }
         }
         return;

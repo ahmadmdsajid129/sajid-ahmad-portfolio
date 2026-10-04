@@ -38,8 +38,8 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
       category: "NAVIGATE",
       description: "Jump to background & quant profile",
       action: () => {
-        router.push("#about");
-        addToast("Navigated to 01 // ABOUT", "info", "ABOUT");
+        router.push("/#about");
+        addToast("Navigated to 01 | ABOUT", "info", "ABOUT");
       },
     },
     {
@@ -48,8 +48,8 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
       category: "NAVIGATE",
       description: "Jump to quantitative tearsheets & models",
       action: () => {
-        router.push("#projects");
-        addToast("Navigated to 02 // PROJECTS", "info", "PROJ");
+        router.push("/#projects");
+        addToast("Navigated to 02 | PROJECTS", "info", "PROJ");
       },
     },
     {
@@ -98,7 +98,7 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
       category: "NAVIGATE",
       description: "Engineering roles & open-source quantitative system builds",
       action: () => {
-        router.push("#experience");
+        router.push("/#experience");
         addToast("Navigated to 03 | EXPERIENCE", "info", "EXP");
       },
     },
@@ -108,8 +108,18 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
       category: "NAVIGATE",
       description: "Degree details, coursework, and reading",
       action: () => {
-        router.push("#education");
+        router.push("/#education");
         addToast("Navigated to 04 | EDUCATION", "info", "EDU");
+      },
+    },
+    {
+      code: "MSG",
+      name: "Contact & Reachout",
+      category: "NAVIGATE",
+      description: "Direct contact form and directory",
+      action: () => {
+        router.push("/#contact");
+        addToast("Navigated to 05 | CONTACT", "info", "MSG");
       },
     },
     {
