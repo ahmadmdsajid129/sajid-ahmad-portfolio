@@ -407,7 +407,7 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
             <span>·</span>
             <span>↵ to execute</span>
           </div>
-          <div>RESEARCH TERMINAL // CMD-PALETTE</div>
+          <div>RESEARCH TERMINAL | CMD-PALETTE</div>
         </div>
       </div>
     </div>
