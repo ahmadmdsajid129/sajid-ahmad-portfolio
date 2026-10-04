@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { siteConfig } from "@/data/site";
 import { OrderBookSimulator } from "./orderbook-simulator";
@@ -12,16 +12,20 @@ interface StatItemProps {
   value: string;
   label: string;
   detail: string;
+  isLive?: boolean;
 }
 
-function StatItem({ value, label, detail }: StatItemProps) {
+function StatItem({ value, label, detail, isLive }: StatItemProps) {
   return (
     <div className="terminal-panel p-3 border-t-2 border-t-accent bg-bg-elevated/70 group hover:border-accent/80 transition-colors">
       <div className="font-mono text-2xl lg:text-3xl font-bold text-text tabular-nums tracking-tight h-8 sm:h-9 flex items-center">
         <SplitFlapBoard value={value} />
       </div>
-      <div className="font-mono text-[11px] font-semibold text-text-muted uppercase mt-1">
-        {label}
+      <div className="font-mono text-[11px] font-semibold text-text-muted uppercase mt-1 flex items-center gap-1.5">
+        <span>{label}</span>
+        {isLive && (
+          <span className="w-1.5 h-1.5 rounded-full bg-up animate-pulse" title="Live verified from GitHub API" />
+        )}
       </div>
       <div className="font-mono text-[10px] text-text-faint truncate">
         {detail}
@@ -37,6 +41,24 @@ interface HeroSectionProps {
 
 export function HeroSection({ onOpenMMGame, onOpenPalette }: HeroSectionProps) {
   const { addToast } = useToast();
+  const [commitCount, setCommitCount] = useState<string>("157");
+  const [isLive, setIsLive] = useState<boolean>(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/github-commits")
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data.commits) {
+          setCommitCount(String(data.commits));
+          setIsLive(data.source === "github-api");
+        }
+      })
+      .catch(() => {});
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleResumeDownload = () => {
     addToast("Resume downloading...", "info", "CV");
@@ -104,7 +126,12 @@ export function HeroSection({ onOpenMMGame, onOpenPalette }: HeroSectionProps) {
             <StatItem value="5" label="Projects" detail="Shipped & documented" />
             <StatItem value="61/61" label="Tests Pass" detail="Fraud engine test suite" />
             <StatItem value="100K" label="MC Paths" detail="Vectorized pricing run" />
-            <StatItem value="114" label="Commits" detail="Flagship repositories" />
+            <StatItem
+              value={commitCount}
+              label="Live Commits"
+              detail="github.com/ahmadmdsajid129"
+              isLive={isLive}
+            />
           </div>
 
           {/* CTAs */}
