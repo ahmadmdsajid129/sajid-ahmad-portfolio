@@ -36,6 +36,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const setTheme = (newTheme: Theme) => {
+    const isActivatingPhosphor = newTheme === "phosphor" && theme !== "phosphor";
     setThemeState(newTheme);
     try {
       localStorage.setItem("theme", newTheme);
@@ -46,6 +47,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       document.documentElement.removeAttribute("data-theme");
     } else {
       document.documentElement.setAttribute("data-theme", newTheme);
+    }
+    if (isActivatingPhosphor && typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("trigger-crt-degauss"));
     }
   };
 

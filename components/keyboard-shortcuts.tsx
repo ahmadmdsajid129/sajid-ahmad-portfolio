@@ -15,7 +15,7 @@ const sectionIds = ["hero", "about", "projects", "experience", "education", "con
 
 export function KeyboardShortcuts({ onOpenPalette, onOpenHelp }: KeyboardShortcutsProps) {
   const router = useRouter();
-  const { toggleTheme, togglePhosphor } = useTheme();
+  const { theme, toggleTheme, togglePhosphor } = useTheme();
   const { addToast } = useToast();
 
   useEffect(() => {
@@ -61,8 +61,15 @@ export function KeyboardShortcuts({ onOpenPalette, onOpenHelp }: KeyboardShortcu
       // Phosphor mode toggle (P)
       if (e.key.toLowerCase() === "p" && !e.ctrlKey && !e.metaKey) {
         e.preventDefault();
+        sound?.playMetalSwitch(theme !== "phosphor");
         togglePhosphor();
-        addToast("Phosphor mode toggled via [P]", "success", "CRT");
+        addToast(
+          theme === "phosphor"
+            ? "CRT Phosphor DISENGAGED [P]"
+            : "CRT Phosphor ENGAGED [P]",
+          "success",
+          "CRT"
+        );
         return;
       }
 
@@ -123,9 +130,49 @@ export function KeyboardShortcuts({ onOpenPalette, onOpenHelp }: KeyboardShortcu
       }
     };
 
+    // Authentic Cherry MX Blue / Typewriter sound on any active input, textarea, or contenteditable
+    const handleGlobalTypingSound = (e: KeyboardEvent) => {
+      if (
+        [
+          "Control",
+          "Alt",
+          "Shift",
+          "Meta",
+          "CapsLock",
+          "Tab",
+          "Escape",
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowLeft",
+          "ArrowRight",
+          "PageUp",
+          "PageDown",
+          "Home",
+          "End",
+        ].includes(e.key)
+      ) {
+        return;
+      }
+
+      const target = e.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.isContentEditable)
+      ) {
+        sound?.playKeyClick(e.key);
+      }
+    };
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onOpenPalette, onOpenHelp, toggleTheme, togglePhosphor, addToast]);
+    window.addEventListener("keydown", handleGlobalTypingSound, { capture: true, passive: true });
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", handleGlobalTypingSound, { capture: true });
+    };
+  }, [onOpenPalette, onOpenHelp, theme, toggleTheme, togglePhosphor, addToast]);
 
   return null;
 }
