@@ -181,25 +181,8 @@ export function ProjectsSection() {
                   </div>
                 </div>
 
-                {/* Key Highlights */}
-                {project.highlights && project.highlights.length > 0 && (
-                  <div className="pt-2 border-t border-border/40 font-mono text-[11px] space-y-1.5">
-                    <div className="text-[10px] text-accent uppercase font-bold tracking-wider">
-                      KEY HIGHLIGHTS
-                    </div>
-                    <ul className="space-y-1 text-text-muted">
-                      {project.highlights.map((highlight, hIdx) => (
-                        <li key={hIdx} className="flex items-start gap-1.5 leading-snug">
-                          <span className="text-accent font-bold mt-0.5 select-none">&rsaquo;</span>
-                          <span>{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
                 {/* Tech Chips */}
-                <div className="flex flex-wrap gap-1.5 pt-1">
+                <div className="flex flex-wrap gap-1.5 pt-2 border-t border-border/40">
                   {project.stack.map((tech) => (
                     <span
                       key={tech}
