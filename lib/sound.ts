@@ -187,6 +187,62 @@ class SoundEngine {
       osc.stop(t + 0.026);
     } catch {}
   }
+
+  /**
+   * Flap Tick: Subtle, rhythmic mechanical split-flap slap sound (Solari board)
+   */
+  public playFlapTick(pitchMod: number = 1.0) {
+    if (this.muted) return;
+    const ctx = this.init();
+    if (!ctx) return;
+
+    try {
+      const t = ctx.currentTime;
+
+      // 1. Soft impact thud (card slap against hinge stop)
+      const osc = ctx.createOscillator();
+      const oscGain = ctx.createGain();
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(320 * pitchMod, t);
+      osc.frequency.exponentialRampToValueAtTime(75, t + 0.018);
+
+      oscGain.gain.setValueAtTime(0.08, t);
+      oscGain.gain.exponentialRampToValueAtTime(0.001, t + 0.02);
+
+      osc.connect(oscGain);
+      oscGain.connect(ctx.destination);
+
+      // 2. Plastic card click transient
+      const bufferSize = Math.floor(ctx.sampleRate * 0.005);
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.4));
+      }
+
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+
+      const filter = ctx.createBiquadFilter();
+      filter.type = "bandpass";
+      filter.frequency.setValueAtTime(1400 * pitchMod, t);
+      filter.Q.setValueAtTime(3.0, t);
+
+      const noiseGain = ctx.createGain();
+      noiseGain.gain.setValueAtTime(0.06, t);
+      noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 0.008);
+
+      noise.connect(filter);
+      filter.connect(noiseGain);
+      noiseGain.connect(ctx.destination);
+
+      osc.start(t);
+      noise.start(t);
+      osc.stop(t + 0.022);
+      noise.stop(t + 0.01);
+    } catch {}
+  }
 }
 
 // Global Singleton

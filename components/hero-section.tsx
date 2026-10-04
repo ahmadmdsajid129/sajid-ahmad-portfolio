@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { siteConfig } from "@/data/site";
 import { OrderBookSimulator } from "./orderbook-simulator";
 import { ArrowRight, ArrowDown, ChevronDown } from "lucide-react";
 import { useToast } from "./toast-provider";
+import { SplitFlapBoard } from "./split-flap-ticker";
 
 interface StatItemProps {
   value: string;
@@ -14,60 +15,12 @@ interface StatItemProps {
 }
 
 function StatItem({ value, label, detail }: StatItemProps) {
-  const [displayVal, setDisplayVal] = useState("0");
-
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) {
-      setDisplayVal(value);
-      return;
-    }
-
-    // Quick count-up effect
-    let start = 0;
-    const duration = 800;
-    const startTime = performance.now();
-
-    const animateNumber = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      // easeOutExpo
-      const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-
-      if (value.includes("/")) {
-        // e.g. 61/61
-        const current = Math.floor(eased * 61);
-        setDisplayVal(`${current}/61`);
-      } else if (value.includes("K")) {
-        // e.g. 100K
-        const current = Math.floor(eased * 100);
-        setDisplayVal(`${current}K`);
-      } else {
-        const target = parseInt(value, 10);
-        if (!isNaN(target)) {
-          const current = Math.floor(eased * target);
-          setDisplayVal(current.toString());
-        } else {
-          setDisplayVal(value);
-        }
-      }
-
-      if (progress < 1) {
-        requestAnimationFrame(animateNumber);
-      } else {
-        setDisplayVal(value);
-      }
-    };
-
-    requestAnimationFrame(animateNumber);
-  }, [value]);
-
   return (
-    <div className="terminal-panel p-3 border-t-2 border-t-accent bg-bg-elevated/70">
-      <div className="font-mono text-2xl lg:text-3xl font-bold text-text tabular-nums tracking-tight">
-        {displayVal}
+    <div className="terminal-panel p-3 border-t-2 border-t-accent bg-bg-elevated/70 group hover:border-accent/80 transition-colors">
+      <div className="font-mono text-2xl lg:text-3xl font-bold text-text tabular-nums tracking-tight h-8 sm:h-9 flex items-center">
+        <SplitFlapBoard value={value} />
       </div>
-      <div className="font-mono text-[11px] font-semibold text-text-muted uppercase mt-0.5">
+      <div className="font-mono text-[11px] font-semibold text-text-muted uppercase mt-1">
         {label}
       </div>
       <div className="font-mono text-[10px] text-text-faint truncate">
