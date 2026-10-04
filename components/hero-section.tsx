@@ -13,11 +13,10 @@ interface StatItemProps {
   label: string;
   detail: string;
   isLive?: boolean;
-  href?: string;
 }
 
-function StatItem({ value, label, detail, isLive, href }: StatItemProps) {
-  const content = (
+function StatItem({ value, label, detail, isLive }: StatItemProps) {
+  return (
     <div className="terminal-panel p-3 border-t-2 border-t-accent bg-bg-elevated/70 group hover:border-accent/80 transition-colors h-full">
       <div className="font-mono text-2xl lg:text-3xl font-bold text-text tabular-nums tracking-tight h-8 sm:h-9 flex items-center">
         <SplitFlapBoard value={value} />
@@ -33,22 +32,6 @@ function StatItem({ value, label, detail, isLive, href }: StatItemProps) {
       </div>
     </div>
   );
-
-  if (href) {
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block group"
-        title="View live GitHub profile & contributions"
-      >
-        {content}
-      </a>
-    );
-  }
-
-  return content;
 }
 
 interface HeroSectionProps {
@@ -148,7 +131,6 @@ export function HeroSection({ onOpenMMGame, onOpenPalette }: HeroSectionProps) {
               label="Live Commits"
               detail="github.com/ahmadmdsajid129"
               isLive={isLive}
-              href="https://github.com/ahmadmdsajid129"
             />
           </div>
 
