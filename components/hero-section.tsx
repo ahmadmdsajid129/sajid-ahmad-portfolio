@@ -13,18 +13,19 @@ interface StatItemProps {
   label: string;
   detail: string;
   isLive?: boolean;
+  href?: string;
 }
 
-function StatItem({ value, label, detail, isLive }: StatItemProps) {
-  return (
-    <div className="terminal-panel p-3 border-t-2 border-t-accent bg-bg-elevated/70 group hover:border-accent/80 transition-colors">
+function StatItem({ value, label, detail, isLive, href }: StatItemProps) {
+  const content = (
+    <div className="terminal-panel p-3 border-t-2 border-t-accent bg-bg-elevated/70 group hover:border-accent/80 transition-colors h-full">
       <div className="font-mono text-2xl lg:text-3xl font-bold text-text tabular-nums tracking-tight h-8 sm:h-9 flex items-center">
         <SplitFlapBoard value={value} />
       </div>
       <div className="font-mono text-[11px] font-semibold text-text-muted uppercase mt-1 flex items-center gap-1.5">
         <span>{label}</span>
         {isLive && (
-          <span className="w-1.5 h-1.5 rounded-full bg-up animate-pulse" title="Live verified from GitHub API" />
+          <span className="w-1.5 h-1.5 rounded-full bg-up animate-pulse" title="Live verified from GitHub (public + private contributions)" />
         )}
       </div>
       <div className="font-mono text-[10px] text-text-faint truncate">
@@ -32,6 +33,22 @@ function StatItem({ value, label, detail, isLive }: StatItemProps) {
       </div>
     </div>
   );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block group"
+        title="View live GitHub profile & contributions"
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return content;
 }
 
 interface HeroSectionProps {
@@ -41,7 +58,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ onOpenMMGame, onOpenPalette }: HeroSectionProps) {
   const { addToast } = useToast();
-  const [commitCount, setCommitCount] = useState<string>("157");
+  const [commitCount, setCommitCount] = useState<string>("1,286");
   const [isLive, setIsLive] = useState<boolean>(true);
 
   useEffect(() => {
@@ -131,6 +148,7 @@ export function HeroSection({ onOpenMMGame, onOpenPalette }: HeroSectionProps) {
               label="Live Commits"
               detail="github.com/ahmadmdsajid129"
               isLive={isLive}
+              href="https://github.com/ahmadmdsajid129"
             />
           </div>
 

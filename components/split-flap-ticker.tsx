@@ -9,7 +9,7 @@ interface SplitFlapCharProps {
   interactive?: boolean;
 }
 
-const CHAR_SET = "0123456789/K%.-+ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const CHAR_SET = "0123456789,/K%.-+ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 export function SplitFlapChar({ char, delayIndex = 0 }: SplitFlapCharProps) {
   const [currentChar, setCurrentChar] = useState<string>(" ");
@@ -63,7 +63,7 @@ export function SplitFlapChar({ char, delayIndex = 0 }: SplitFlapCharProps) {
       className="relative inline-block select-none"
       style={{
         perspective: "300px",
-        width: char === " " ? "0.45em" : "0.72em",
+        width: char === " " ? "0.45em" : char === "," ? "0.5em" : "0.72em",
         height: "1.25em",
       }}
     >
