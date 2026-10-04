@@ -2,13 +2,12 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-export type Theme = "dark" | "paper" | "phosphor";
+export type Theme = "dark" | "paper";
 
 interface ThemeContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
   toggleTheme: () => void;
-  togglePhosphor: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -20,7 +19,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     try {
       const stored = localStorage.getItem("theme") as Theme | null;
-      if (stored === "paper" || stored === "phosphor" || stored === "dark") {
+      if (stored === "paper" || stored === "dark") {
         setThemeState(stored);
         document.documentElement.setAttribute("data-theme", stored);
       } else {
@@ -36,7 +35,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const setTheme = (newTheme: Theme) => {
-    const isActivatingPhosphor = newTheme === "phosphor" && theme !== "phosphor";
     setThemeState(newTheme);
     try {
       localStorage.setItem("theme", newTheme);
@@ -48,31 +46,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } else {
       document.documentElement.setAttribute("data-theme", newTheme);
     }
-    if (isActivatingPhosphor && typeof window !== "undefined") {
-      window.dispatchEvent(new CustomEvent("trigger-crt-degauss"));
-    }
   };
 
   const toggleTheme = () => {
-    if (theme === "phosphor") {
-      setTheme("dark");
-    } else if (theme === "dark") {
-      setTheme("paper");
-    } else {
-      setTheme("dark");
-    }
-  };
-
-  const togglePhosphor = () => {
-    if (theme === "phosphor") {
-      setTheme("dark");
-    } else {
-      setTheme("phosphor");
-    }
+    setTheme(theme === "dark" ? "paper" : "dark");
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme, togglePhosphor }}>
+    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
       {/* Prevent flash of wrong theme before mounted */}
       <div style={{ visibility: mounted ? "visible" : "hidden" }}>
         {children}

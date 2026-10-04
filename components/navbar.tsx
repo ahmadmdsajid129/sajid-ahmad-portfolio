@@ -9,7 +9,6 @@ import { useTheme } from "./theme-provider";
 import { useToast } from "./toast-provider";
 import { sound } from "@/lib/sound";
 import { Sun, Moon, Terminal as TerminalIcon, Menu, X, ArrowDown } from "lucide-react";
-import { MetalThrowSwitch } from "./metal-throw-switch";
 
 interface NavItem {
   id: string;
@@ -158,11 +157,6 @@ export function Navbar({ onOpenPalette }: NavbarProps) {
               <span>⌘K</span>
             </button>
 
-            {/* Industrial Metal Throw-Switch for CRT Phosphor Mode */}
-            <div className="hidden sm:block">
-              <MetalThrowSwitch />
-            </div>
-
             {/* Theme Toggle (Paper / Dark) */}
             <button
               onClick={toggleTheme}
@@ -172,8 +166,6 @@ export function Navbar({ onOpenPalette }: NavbarProps) {
             >
               {theme === "paper" ? (
                 <Moon className="w-4 h-4 stroke-[1.5]" />
-              ) : theme === "phosphor" ? (
-                <TerminalIcon className="w-4 h-4 text-accent stroke-[1.5]" />
               ) : (
                 <Sun className="w-4 h-4 stroke-[1.5]" />
               )}
@@ -237,11 +229,6 @@ export function Navbar({ onOpenPalette }: NavbarProps) {
                   <span className="text-xs text-accent">GO &rarr;</span>
                 </Link>
               ))}
-
-              <div className="flex items-center justify-between py-2 border-b border-border/40">
-                <span className="text-xs text-text-muted">CRT PHOSPHOR HARDWARE SWITCH</span>
-                <MetalThrowSwitch />
-              </div>
 
               <a
                 href={siteConfig.resumeUrl}

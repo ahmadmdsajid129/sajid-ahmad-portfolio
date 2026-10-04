@@ -15,7 +15,7 @@ const sectionIds = ["hero", "about", "projects", "experience", "education", "con
 
 export function KeyboardShortcuts({ onOpenPalette, onOpenHelp }: KeyboardShortcutsProps) {
   const router = useRouter();
-  const { theme, toggleTheme, togglePhosphor } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const { addToast } = useToast();
 
   useEffect(() => {
@@ -55,21 +55,6 @@ export function KeyboardShortcuts({ onOpenPalette, onOpenHelp }: KeyboardShortcu
         e.preventDefault();
         toggleTheme();
         addToast("Theme toggled via [T]", "info", "THEME");
-        return;
-      }
-
-      // Phosphor mode toggle (P)
-      if (e.key.toLowerCase() === "p" && !e.ctrlKey && !e.metaKey) {
-        e.preventDefault();
-        sound?.playMetalSwitch(theme !== "phosphor");
-        togglePhosphor();
-        addToast(
-          theme === "phosphor"
-            ? "CRT Phosphor DISENGAGED [P]"
-            : "CRT Phosphor ENGAGED [P]",
-          "success",
-          "CRT"
-        );
         return;
       }
 
@@ -172,7 +157,7 @@ export function KeyboardShortcuts({ onOpenPalette, onOpenHelp }: KeyboardShortcu
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keydown", handleGlobalTypingSound, { capture: true });
     };
-  }, [onOpenPalette, onOpenHelp, theme, toggleTheme, togglePhosphor, addToast]);
+  }, [onOpenPalette, onOpenHelp, theme, toggleTheme, addToast]);
 
   return null;
 }

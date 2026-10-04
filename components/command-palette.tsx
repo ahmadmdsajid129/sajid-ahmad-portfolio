@@ -26,7 +26,7 @@ interface CommandPaletteProps {
 
 export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: CommandPaletteProps) {
   const router = useRouter();
-  const { toggleTheme, togglePhosphor } = useTheme();
+  const { toggleTheme } = useTheme();
   const { addToast } = useToast();
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -202,17 +202,6 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
     },
     // Hidden Easter Eggs
     {
-      code: "PHOSPHOR",
-      name: "Phosphor Mode",
-      category: "HIDDEN",
-      description: "CRT Monochrome Green phosphor scanline mode",
-      hidden: true,
-      action: () => {
-        togglePhosphor();
-        addToast("PHOSPHOR CRT MODE TOGGLED", "success", "CRT");
-      },
-    },
-    {
       code: "SHARPE",
       name: "Sharpe Reality Check",
       category: "HIDDEN",
@@ -344,7 +333,7 @@ export function CommandPalette({ isOpen, onClose, onOpenMMGame, onOpenHelp }: Co
         <div className="max-h-[360px] overflow-y-auto divide-y divide-border/40">
           {filtered.length === 0 ? (
             <div className="p-6 text-center text-xs text-text-faint">
-              NO MATCHING COMMAND // TYPE <span className="text-accent">HELP</span> FOR DIRECTORY
+              NO MATCHING COMMAND | TYPE <span className="text-accent">HELP</span> FOR DIRECTORY
             </div>
           ) : (
             filtered.map((cmd, index) => {

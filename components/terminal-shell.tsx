@@ -9,7 +9,6 @@ import { HelpModal } from "./help-modal";
 import { KeyboardShortcuts } from "./keyboard-shortcuts";
 import { BootSequence } from "./boot-sequence";
 import { MarketMakerGame } from "./marketmaker-game";
-import { CrtDegaussFlash } from "./crt-degauss-flash";
 
 interface ShellContextType {
   openPalette: () => void;
@@ -43,7 +42,6 @@ export function TerminalShell({ children }: TerminalShellProps) {
   return (
     <ShellContext.Provider value={{ openPalette, openHelp, openMMGame }}>
       <div className="min-h-screen flex flex-col bg-bg text-text selection:bg-accent selection:text-bg">
-        <CrtDegaussFlash />
         <BootSequence />
         <TickerTape />
         <Navbar onOpenPalette={openPalette} />
