@@ -32,18 +32,24 @@ export async function POST(req: Request) {
       );
     }
 
-    const recipient = "ahmadmdsajid129@gmail.com";
-    const origin = req.headers.get("origin") || req.headers.get("referer") || "https://sajidahmad.dev";
+    const endpointId = process.env.FORMSUBMIT_TOKEN || "ahmadmdsajid129@gmail.com";
+    const reqOrigin = req.headers.get("origin") || req.headers.get("referer");
+    let origin = "http://localhost:3000";
+    try {
+      if (reqOrigin) {
+        origin = new URL(reqOrigin).origin;
+      }
+    } catch {}
 
     // Forward to FormSubmit.co
-    const formSubmitRes = await fetch(`https://formsubmit.co/ajax/${recipient}`, {
+    const formSubmitRes = await fetch(`https://formsubmit.co/ajax/${endpointId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
         Origin: origin,
-        Referer: origin,
-        "User-Agent": "Sajid-Portfolio-Relay/1.0",
+        Referer: `${origin}/`,
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Portfolio-Relay/1.0",
       },
       body: JSON.stringify({
         name: name.trim(),
@@ -57,6 +63,26 @@ export async function POST(req: Request) {
     });
 
     const data = await formSubmitRes.json().catch(() => ({}));
+    const isSuccess = data.success === "true" || data.success === true;
+    const isActivationNeeded =
+      typeof data.message === "string" &&
+      data.message.toLowerCase().includes("activation");
+
+    if (isActivationNeeded) {
+      return NextResponse.json({
+        ok: true,
+        status: "activation_required",
+        message: "One-time activation email sent to ahmadmdsajid129@gmail.com. Confirm it once to activate.",
+        info: data.message,
+      });
+    }
+
+    if (!isSuccess && formSubmitRes.status >= 400) {
+      return NextResponse.json(
+        { ok: false, error: data.message || "Relay service error" },
+        { status: formSubmitRes.status }
+      );
+    }
 
     return NextResponse.json({
       ok: true,
